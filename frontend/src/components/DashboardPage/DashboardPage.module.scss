@@ -1,0 +1,251 @@
+.page {
+    width: 100%;
+    padding: 1.5rem 0 0;
+    display: grid;
+    gap: 1.25rem;
+}
+
+.header {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 1rem;
+}
+
+.kicker,
+.panelKicker {
+    margin: 0 0 0.4rem;
+    color: #6b7280;
+    font-size: 0.82rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.title {
+    margin: 0;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: clamp(2rem, 3vw, 2.8rem);
+    line-height: 1;
+    color: #111827;
+}
+
+.subtitle {
+    max-width: 60ch;
+    margin: 0.65rem 0 0;
+    color: #6b7280;
+}
+
+.periodBadge {
+    padding: 0.85rem 1rem;
+    border: 1px solid #e5e7eb;
+    border-radius: 999px;
+    color: #111827;
+    white-space: nowrap;
+}
+
+.statsGrid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 1rem;
+}
+
+.statCard,
+.panel,
+.panelWide {
+    border: 1px solid #eef1f4;
+    border-radius: 24px;
+    background: #ffffff;
+}
+
+.statCard {
+    padding: 1.25rem;
+}
+
+.statLabel {
+    margin: 0;
+    color: #6b7280;
+    font-size: 0.88rem;
+}
+
+.statValue {
+    margin: 0.65rem 0 0;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.65rem;
+    line-height: 1.08;
+    color: #111827;
+}
+
+.mainGrid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1rem;
+}
+
+.panel,
+.panelWide {
+    padding: 1.25rem;
+}
+
+.panelWide {
+    grid-column: 1 / -1;
+}
+
+.panelHeader {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.transactionList,
+.categoryList {
+    display: grid;
+    gap: 0.85rem;
+}
+
+.transactionRow {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 0.9rem 0;
+    border-top: 1px solid #f3f4f6;
+}
+
+.transactionRow:first-child {
+    padding-top: 0;
+    border-top: 0;
+}
+
+.transactionTitle {
+    margin: 0;
+    color: #111827;
+    font-size: 1rem;
+}
+
+.transactionMeta {
+    margin: 0.35rem 0 0;
+    color: #6b7280;
+}
+
+.transactionAmount {
+    color: #111827;
+    white-space: nowrap;
+}
+
+.categoryRow {
+    display: grid;
+    gap: 0.55rem;
+}
+
+.categoryCopy {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    color: #111827;
+}
+
+.categoryTrack {
+    overflow: hidden;
+    height: 0.7rem;
+    border-radius: 999px;
+    background: #f3f4f6;
+}
+
+.categoryFill {
+    height: 100%;
+    border-radius: inherit;
+    background: #111827;
+}
+
+.trendGrid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 1rem;
+}
+
+.trendCard {
+    padding: 1rem;
+    border-radius: 18px;
+    background: #fafafa;
+}
+
+.trendLabel {
+    margin: 0;
+    color: #111827;
+    font-weight: 600;
+}
+
+.trendBars {
+    display: grid;
+    gap: 0.55rem;
+    margin: 1rem 0 0;
+}
+
+.trendIncome,
+.trendExpense {
+    height: 0.72rem;
+    border-radius: 999px;
+}
+
+.trendIncome {
+    background: #111827;
+}
+
+.trendExpense {
+    background: #d1d5db;
+}
+
+.trendMeta {
+    display: flex;
+    justify-content: space-between;
+    gap: 0.75rem;
+    margin-top: 0.9rem;
+    color: #6b7280;
+    font-size: 0.88rem;
+}
+
+@media (max-width: 1100px) {
+    .statsGrid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .mainGrid,
+    .trendGrid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 720px) {
+    .header,
+    .panelHeader,
+    .transactionRow,
+    .categoryCopy {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .periodBadge {
+        width: 100%;
+    }
+}
+
+@media (max-width: 640px) {
+    .page {
+        padding-top: 0.75rem;
+    }
+
+    .statsGrid {
+        grid-template-columns: 1fr;
+    }
+
+    .statCard,
+    .panel,
+    .panelWide {
+        border-radius: 20px;
+        padding: 1rem;
+    }
+}

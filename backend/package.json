@@ -1,0 +1,31 @@
+{
+    "name": "@pocketledger/backend",
+    "private": true,
+    "version": "0.1.0",
+    "type": "module",
+    "scripts": {
+        "predev": "npm --prefix .. run build --workspace @pocketledger/contracts && npm --prefix .. run build --workspace @pocketledger/database && npm --prefix .. run build --workspace @pocketledger/application",
+        "dev": "tsx watch src/server.ts",
+        "prebuild": "npm --prefix .. run build --workspace @pocketledger/contracts && npm --prefix .. run build --workspace @pocketledger/database && npm --prefix .. run build --workspace @pocketledger/application",
+        "build": "tsc -p tsconfig.json",
+        "start": "node dist/server.js",
+        "db:generate": "npm --prefix .. run db:generate",
+        "db:migrate": "npm --prefix .. run db:migrate",
+        "db:studio": "npm --prefix .. run db:studio"
+    },
+    "dependencies": {
+        "@pocketledger/application": "file:../application",
+        "@pocketledger/contracts": "file:../contracts",
+        "@pocketledger/database": "file:../database",
+        "@fastify/cors": "^11.1.0",
+        "@fastify/sensible": "^6.0.3",
+        "dotenv": "^16.4.7",
+        "fastify": "^5.3.0",
+        "zod": "^3.24.2"
+    },
+    "devDependencies": {
+        "@types/node": "^22.14.1",
+        "tsx": "^4.19.3",
+        "typescript": "^5.8.3"
+    }
+}

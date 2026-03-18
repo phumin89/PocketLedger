@@ -1,0 +1,11 @@
+model User {
+  id           String   @id @default(cuid())
+  email        String   @unique
+  firstName    String
+  lastName     String
+  locale       String   @default("th-TH")
+  timeZone     String   @default("Asia/Bangkok")
+  currencyCode String   @default("THB")
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}

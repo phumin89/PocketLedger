@@ -1,0 +1,123 @@
+@use '../../styles/mixins' as mixins;
+
+.section {
+    display: grid;
+    grid-template-columns: minmax(0, 1.7fr) minmax(280px, 0.9fr);
+    gap: 1.5rem;
+    align-items: stretch;
+}
+
+.copy {
+    @include mixins.glass-panel(
+        linear-gradient(135deg, rgba(28, 109, 91, 0.08), transparent 42%),
+        rgba(255, 255, 255, 0.74)
+    );
+    padding: 2rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.copy::after {
+    content: '';
+    position: absolute;
+    inset: auto -8% -24% auto;
+    width: 280px;
+    aspect-ratio: 1;
+    border-radius: 999px;
+    background: radial-gradient(circle, rgba(28, 109, 91, 0.12), transparent 70%);
+    pointer-events: none;
+}
+
+.eyebrow {
+    @include mixins.eyebrow;
+}
+
+.title {
+    @include mixins.display-heading;
+    max-width: 11ch;
+    font-size: clamp(2.9rem, 5vw, 5.2rem);
+    line-height: 0.98;
+    color: var(--text-strong);
+}
+
+.lead {
+    max-width: 60ch;
+    margin: 1.25rem 0 0;
+    color: var(--muted);
+    font-size: 1.05rem;
+}
+
+.actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-top: 1.5rem;
+}
+
+.primaryAction,
+.secondaryAction {
+    height: 2.9rem;
+    padding: 0 1.1rem;
+    border-radius: 999px;
+    border: 1px solid transparent;
+    cursor: pointer;
+    transition:
+        transform 160ms ease,
+        box-shadow 160ms ease,
+        border-color 160ms ease;
+}
+
+.primaryAction {
+    background: var(--accent);
+    color: #f7fbfa;
+    box-shadow: 0 14px 26px rgba(28, 109, 91, 0.18);
+}
+
+.secondaryAction {
+    background: rgba(255, 255, 255, 0.66);
+    border-color: var(--stroke-strong);
+    color: var(--text-strong);
+}
+
+.primaryAction:hover,
+.secondaryAction:hover {
+    transform: translateY(-1px);
+}
+
+.chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.65rem;
+    margin-top: 1.5rem;
+}
+
+.chip {
+    padding: 0.55rem 0.85rem;
+    border-radius: 999px;
+    background: rgba(247, 244, 236, 0.9);
+    border: 1px solid rgba(23, 32, 35, 0.08);
+    color: var(--text-soft);
+    font-size: 0.92rem;
+}
+
+@media (max-width: 920px) {
+    .section {
+        grid-template-columns: 1fr;
+    }
+
+    .title {
+        max-width: 14ch;
+    }
+}
+
+@media (max-width: 640px) {
+    .copy {
+        border-radius: 22px;
+        padding: 1.2rem;
+    }
+
+    .title {
+        max-width: 12ch;
+        font-size: 2.5rem;
+    }
+}

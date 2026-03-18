@@ -1,0 +1,22 @@
+@mixin glass-panel($background...) {
+    border: 1px solid var(--stroke);
+    border-radius: 26px;
+    backdrop-filter: blur(16px);
+    box-shadow: 0 20px 48px rgba(40, 52, 49, 0.08);
+    background: $background;
+}
+
+@mixin eyebrow {
+    margin: 0 0 0.8rem;
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    font-size: 0.72rem;
+    font-weight: 700;
+}
+
+@mixin display-heading {
+    font-family: 'Space Grotesk', sans-serif;
+    margin: 0;
+    letter-spacing: -0.04em;
+}

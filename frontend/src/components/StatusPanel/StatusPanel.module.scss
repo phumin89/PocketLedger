@@ -1,0 +1,62 @@
+@use '../../styles/mixins' as mixins;
+
+.panel {
+    @include mixins.glass-panel(rgba(249, 245, 237, 0.94));
+    padding: 1.5rem;
+}
+
+.header {
+    margin-bottom: 1rem;
+}
+
+.eyebrow {
+    @include mixins.eyebrow;
+    margin-bottom: 0.45rem;
+}
+
+.title {
+    @include mixins.display-heading;
+    font-size: 1.4rem;
+    color: var(--text-strong);
+}
+
+.row {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 1rem 0;
+    border-bottom: 1px solid var(--stroke);
+}
+
+.row:first-child {
+    padding-top: 0;
+}
+
+.row:last-of-type {
+    border-bottom: 0;
+    padding-bottom: 0;
+}
+
+.label {
+    color: var(--muted);
+}
+
+.value {
+    color: var(--text-strong);
+    text-transform: capitalize;
+}
+
+.error {
+    margin: 1rem 0 0;
+    padding: 0.85rem 1rem;
+    border-radius: 18px;
+    background: rgba(176, 76, 40, 0.1);
+    color: #92400e;
+}
+
+@media (max-width: 640px) {
+    .panel {
+        border-radius: 22px;
+        padding: 1.2rem;
+    }
+}

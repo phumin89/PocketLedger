@@ -1,0 +1,37 @@
+{
+    "name": "pocketledger",
+    "private": true,
+    "version": "0.1.0",
+    "workspaces": [
+        "frontend",
+        "backend",
+        "application",
+        "contracts",
+        "database"
+    ],
+    "scripts": {
+        "dev": "concurrently \"npm run dev --workspace backend\" \"npm run dev --workspace frontend\"",
+        "dev:all": "docker compose up --build --watch",
+        "dev:docker": "docker compose up --build --watch",
+        "dev:docker:detached": "docker compose up --build -d",
+        "dev:docker:down": "docker compose down",
+        "dev:local": "concurrently \"npm run dev --workspace backend\" \"npm run dev --workspace frontend\"",
+        "dev:frontend": "npm run dev --workspace frontend",
+        "dev:backend": "npm run dev --workspace backend",
+        "build": "npm run build --workspace backend && npm run build --workspace frontend",
+        "format": "prettier . --write",
+        "format:check": "prettier . --check",
+        "db:up": "docker compose up -d postgres",
+        "db:down": "docker compose stop postgres",
+        "db:logs": "docker compose logs -f postgres",
+        "db:generate": "npm run db:generate --workspace @pocketledger/database",
+        "db:migrate": "npm run db:migrate --workspace @pocketledger/database",
+        "db:studio": "npm run db:studio --workspace @pocketledger/database",
+        "db:studio:docker": "docker compose up -d prisma-studio"
+    },
+    "devDependencies": {
+        "concurrently": "^9.2.1",
+        "prettier": "^3.6.2",
+        "prettier-plugin-organize-imports": "^4.3.0"
+    }
+}

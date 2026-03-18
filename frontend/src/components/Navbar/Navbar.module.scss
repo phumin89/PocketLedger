@@ -1,0 +1,102 @@
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    width: 100%;
+    padding: 0.9rem 1.5rem;
+    border-bottom: 1px solid #eef1f4;
+    background: rgba(255, 255, 255, 0.92);
+    backdrop-filter: blur(16px);
+    box-shadow: 0 8px 24px rgba(17, 24, 39, 0.04);
+}
+
+.inner {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 0.85rem;
+    min-width: 0;
+}
+
+.brandMark {
+    display: grid;
+    place-items: center;
+    width: 2.65rem;
+    height: 2.65rem;
+    border-radius: 14px;
+    background: #111827;
+    color: #f8faf9;
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 700;
+    letter-spacing: -0.04em;
+}
+
+.brandText {
+    display: grid;
+    gap: 0.15rem;
+    color: #6b7280;
+}
+
+.brandText strong {
+    color: #111827;
+    font-size: 0.98rem;
+}
+
+.brandText small {
+    font-size: 0.78rem;
+}
+
+.links {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.25rem;
+}
+
+.link,
+.linkActive {
+    padding: 0.55rem 0.85rem;
+    border-radius: 999px;
+    color: #4b5563;
+    font-size: 0.94rem;
+}
+
+.link {
+    background: transparent;
+}
+
+.linkActive {
+    background: #f3f4f6;
+    color: #111827;
+}
+
+@media (max-width: 860px) {
+    .inner {
+        flex-wrap: wrap;
+    }
+
+    .links {
+        order: 3;
+        width: 100%;
+        justify-content: flex-start;
+    }
+}
+
+@media (max-width: 640px) {
+    .navbar {
+        padding: 0.75rem 1rem;
+    }
+
+    .brandText small {
+        display: none;
+    }
+}

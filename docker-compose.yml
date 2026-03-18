@@ -1,0 +1,153 @@
+services:
+    postgres:
+        image: postgres:16-alpine
+        container_name: pocketledger-postgres
+        environment:
+            POSTGRES_DB: pocketledger
+            POSTGRES_USER: postgres
+            POSTGRES_PASSWORD: postgres
+        ports:
+            - '5432:5432'
+        volumes:
+            - postgres-data:/var/lib/postgresql/data
+        healthcheck:
+            test: ['CMD-SHELL', 'pg_isready -U postgres -d pocketledger']
+            interval: 5s
+            timeout: 5s
+            retries: 10
+
+    backend:
+        build:
+            context: .
+            dockerfile: ./docker/backend.Dockerfile
+        container_name: pocketledger-backend
+        working_dir: /app/backend
+        environment:
+            PORT: 3000
+            HOST: 0.0.0.0
+            FRONTEND_ORIGIN: http://localhost:4200
+            DATABASE_URL: postgresql://postgres:postgres@postgres:5432/pocketledger?schema=public
+        ports:
+            - '4201:3000'
+        depends_on:
+            postgres:
+                condition: service_healthy
+        healthcheck:
+            test: ['CMD-SHELL', 'wget -qO- http://127.0.0.1:3000/api/health > /dev/null || exit 1']
+            interval: 5s
+            timeout: 5s
+            retries: 10
+            start_period: 15s
+        develop:
+            watch:
+                - action: sync
+                  path: ./backend/src
+                  target: /app/backend/src
+                - action: sync
+                  path: ./backend/tsconfig.json
+                  target: /app/backend/tsconfig.json
+                - action: sync
+                  path: ./application/src
+                  target: /app/application/src
+                - action: sync
+                  path: ./application/tsconfig.json
+                  target: /app/application/tsconfig.json
+                - action: sync
+                  path: ./contracts/src
+                  target: /app/contracts/src
+                - action: sync
+                  path: ./contracts/tsconfig.json
+                  target: /app/contracts/tsconfig.json
+                - action: rebuild
+                  path: ./backend/package.json
+                - action: rebuild
+                  path: ./application/package.json
+                - action: rebuild
+                  path: ./contracts/package.json
+                - action: rebuild
+                  path: ./database
+                - action: rebuild
+                  path: ./package.json
+                - action: rebuild
+                  path: ./package-lock.json
+
+    prisma-studio:
+        build:
+            context: .
+            dockerfile: ./docker/backend.Dockerfile
+        container_name: pocketledger-prisma-studio
+        working_dir: /app
+        command: npm run db:studio --workspace @pocketledger/database -- --port 5555 --browser none
+        environment:
+            DATABASE_URL: postgresql://postgres:postgres@postgres:5432/pocketledger?schema=public
+        ports:
+            - '4202:5555'
+        depends_on:
+            postgres:
+                condition: service_healthy
+        healthcheck:
+            test: ['CMD-SHELL', 'wget -qO- http://127.0.0.1:5555 > /dev/null || exit 1']
+            interval: 5s
+            timeout: 5s
+            retries: 10
+            start_period: 15s
+        develop:
+            watch:
+                - action: rebuild
+                  path: ./database
+                - action: rebuild
+                  path: ./contracts
+                - action: rebuild
+                  path: ./package.json
+                - action: rebuild
+                  path: ./package-lock.json
+
+    frontend:
+        build:
+            context: .
+            dockerfile: ./docker/frontend.Dockerfile
+        container_name: pocketledger-frontend
+        working_dir: /app/frontend
+        command: npm run dev -- --host 0.0.0.0
+        environment:
+            VITE_API_PROXY_TARGET: http://backend:3000
+        ports:
+            - '4200:5173'
+        depends_on:
+            backend:
+                condition: service_healthy
+        healthcheck:
+            test: ['CMD-SHELL', 'wget -qO- http://127.0.0.1:5173 > /dev/null || exit 1']
+            interval: 5s
+            timeout: 5s
+            retries: 10
+            start_period: 15s
+        develop:
+            watch:
+                - action: sync
+                  path: ./frontend/src
+                  target: /app/frontend/src
+                - action: sync
+                  path: ./frontend/index.html
+                  target: /app/frontend/index.html
+                - action: sync+restart
+                  path: ./frontend/vite.config.ts
+                  target: /app/frontend/vite.config.ts
+                - action: sync+restart
+                  path: ./frontend/tsconfig.json
+                  target: /app/frontend/tsconfig.json
+                - action: sync+restart
+                  path: ./frontend/tsconfig.app.json
+                  target: /app/frontend/tsconfig.app.json
+                - action: sync+restart
+                  path: ./frontend/tsconfig.node.json
+                  target: /app/frontend/tsconfig.node.json
+                - action: rebuild
+                  path: ./frontend/package.json
+                - action: rebuild
+                  path: ./package.json
+                - action: rebuild
+                  path: ./package-lock.json
+
+volumes:
+    postgres-data:

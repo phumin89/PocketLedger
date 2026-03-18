@@ -1,0 +1,313 @@
+.page {
+    width: 100%;
+    padding: 1.5rem 0 0;
+    display: grid;
+    gap: 1.25rem;
+}
+
+.header {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 1rem;
+}
+
+.kicker {
+    margin: 0 0 0.45rem;
+    font-size: 0.82rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #6b7280;
+}
+
+.title {
+    margin: 0;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: clamp(2rem, 3vw, 2.8rem);
+    line-height: 1;
+    color: #111827;
+}
+
+.subtitle {
+    margin: 0.55rem 0 0;
+    color: #6b7280;
+}
+
+.statsGrid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 1rem;
+}
+
+.statCard,
+.profileCard,
+.panel {
+    border: 1px solid #eef1f4;
+    border-radius: 24px;
+    background: #ffffff;
+}
+
+.statCard {
+    padding: 1.25rem;
+}
+
+.statLabel {
+    margin: 0;
+    color: #6b7280;
+    font-size: 0.88rem;
+}
+
+.statValue {
+    margin: 0.65rem 0 0;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.7rem;
+    line-height: 1.05;
+    color: #111827;
+}
+
+.statChange,
+.statChangePositive {
+    margin: 0.6rem 0 0;
+    font-size: 0.9rem;
+}
+
+.statChange {
+    color: #6b7280;
+}
+
+.statChangePositive {
+    color: #0f766e;
+}
+
+.mainGrid {
+    display: grid;
+    grid-template-columns: minmax(280px, 0.95fr) minmax(0, 1.35fr);
+    gap: 1rem;
+}
+
+.profileCard {
+    grid-row: span 2;
+    padding: 1.5rem;
+}
+
+.profileHeader {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.avatar {
+    display: grid;
+    place-items: center;
+    width: 3.5rem;
+    height: 3.5rem;
+    border-radius: 18px;
+    background: #111827;
+    color: #ffffff;
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 700;
+}
+
+.profileName {
+    margin: 0;
+    font-size: 1.35rem;
+    color: #111827;
+}
+
+.profileMeta {
+    margin: 0.3rem 0 0;
+    color: #6b7280;
+}
+
+.profileFacts {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1rem;
+    margin: 1.5rem 0;
+}
+
+.profileFacts dt {
+    color: #6b7280;
+    font-size: 0.82rem;
+}
+
+.profileFacts dd {
+    margin: 0.35rem 0 0;
+    color: #111827;
+    font-weight: 700;
+}
+
+.highlightList {
+    display: grid;
+    gap: 0.85rem;
+}
+
+.highlightRow {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    padding-top: 0.85rem;
+    border-top: 1px solid #f3f4f6;
+}
+
+.highlightRow span {
+    color: #6b7280;
+}
+
+.highlightRow strong {
+    color: #111827;
+    text-align: right;
+}
+
+.panel {
+    padding: 1.5rem;
+}
+
+.panelHeader {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 1.25rem;
+}
+
+.panelKicker {
+    margin: 0;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: #6b7280;
+}
+
+.panelTitle {
+    margin: 0.35rem 0 0;
+    font-size: 1.2rem;
+    color: #111827;
+}
+
+.chart {
+    display: grid;
+    gap: 0.9rem;
+}
+
+.chartRow {
+    display: grid;
+    grid-template-columns: 2.4rem minmax(0, 1fr);
+    gap: 0.9rem;
+    align-items: center;
+}
+
+.chartLabel {
+    color: #6b7280;
+    font-size: 0.9rem;
+}
+
+.chartBars {
+    display: grid;
+    gap: 0.45rem;
+}
+
+.incomeBar,
+.expenseBar {
+    height: 0.7rem;
+    border-radius: 999px;
+}
+
+.incomeBar {
+    background: #111827;
+}
+
+.expenseBar {
+    background: #d1d5db;
+}
+
+.categoryList {
+    display: grid;
+    gap: 1rem;
+}
+
+.categoryRow {
+    display: grid;
+    grid-template-columns: minmax(120px, 180px) minmax(0, 1fr) 3rem;
+    gap: 1rem;
+    align-items: center;
+}
+
+.categoryCopy {
+    display: grid;
+    gap: 0.2rem;
+}
+
+.categoryCopy strong {
+    color: #111827;
+}
+
+.categoryCopy span,
+.categoryShare {
+    color: #6b7280;
+    font-size: 0.9rem;
+}
+
+.categoryTrack {
+    overflow: hidden;
+    height: 0.65rem;
+    border-radius: 999px;
+    background: #f3f4f6;
+}
+
+.categoryFill {
+    height: 100%;
+    border-radius: inherit;
+    background: #111827;
+}
+
+@media (max-width: 1080px) {
+    .statsGrid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .mainGrid {
+        grid-template-columns: 1fr;
+    }
+
+    .profileCard {
+        grid-row: auto;
+    }
+}
+
+@media (max-width: 640px) {
+    .page {
+        padding-top: 0.75rem;
+    }
+
+    .statsGrid,
+    .profileFacts {
+        grid-template-columns: 1fr;
+    }
+
+    .statCard,
+    .profileCard,
+    .panel {
+        border-radius: 20px;
+    }
+
+    .statCard,
+    .profileCard,
+    .panel {
+        padding: 1rem;
+    }
+
+    .categoryRow {
+        grid-template-columns: 1fr;
+        gap: 0.55rem;
+    }
+
+    .highlightRow {
+        flex-direction: column;
+    }
+
+    .highlightRow strong {
+        text-align: left;
+    }
+}

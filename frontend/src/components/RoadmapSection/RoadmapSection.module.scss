@@ -1,0 +1,66 @@
+@use '../../styles/mixins' as mixins;
+
+.section {
+    @include mixins.glass-panel(
+        linear-gradient(120deg, rgba(28, 109, 91, 0.06), transparent 36%),
+        rgba(251, 248, 242, 0.92)
+    );
+    padding: 1.8rem;
+}
+
+.eyebrow {
+    @include mixins.eyebrow;
+}
+
+.title {
+    @include mixins.display-heading;
+}
+
+.list {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1rem;
+    margin-top: 1.5rem;
+}
+
+.item {
+    display: flex;
+    gap: 0.8rem;
+    align-items: flex-start;
+    padding: 1rem;
+    border-radius: 20px;
+    background: rgba(255, 255, 255, 0.72);
+}
+
+.dot {
+    width: 0.8rem;
+    height: 0.8rem;
+    border-radius: 999px;
+    margin-top: 0.35rem;
+    background: linear-gradient(135deg, var(--accent), #b9d9d0);
+    box-shadow: 0 0 16px rgba(28, 109, 91, 0.22);
+}
+
+.itemTitle {
+    margin: 0;
+    color: var(--text-strong);
+    font-weight: 700;
+}
+
+.itemDetail {
+    margin: 0.35rem 0 0;
+    color: var(--muted);
+}
+
+@media (max-width: 920px) {
+    .list {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 640px) {
+    .section {
+        border-radius: 22px;
+        padding: 1.2rem;
+    }
+}
