@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
-import type { ApiHealth } from '../lib/ApiHealth';
-import { fetchApiHealth } from '../lib/api';
+import type { ApiHealth } from '../services/system/ApiHealth';
+import { getApiHealth } from '../services/system/getApiHealth';
 import type { UseApiHealthResult } from './UseApiHealthResult';
 
 export function useApiHealth(): UseApiHealthResult {
@@ -8,12 +8,27 @@ export function useApiHealth(): UseApiHealthResult {
     const [error, setError] = useState<string | null>(null);
 
     useEffect(() => {
+        const abortController = new AbortController();
+        let isActive = true;
+
         async function loadHealth() {
             try {
-                const health = await fetchApiHealth();
+                const health = await getApiHealth(abortController.signal);
+                if (!isActive) {
+                    return;
+                }
+
                 setApiHealth(health);
                 setError(null);
             } catch (loadError) {
+                if (loadError instanceof DOMException && loadError.name === 'AbortError') {
+                    return;
+                }
+
+                if (!isActive) {
+                    return;
+                }
+
                 setError(
                     loadError instanceof Error
                         ? loadError.message
@@ -23,6 +38,11 @@ export function useApiHealth(): UseApiHealthResult {
         }
 
         void loadHealth();
+
+        return () => {
+            isActive = false;
+            abortController.abort();
+        };
     }, []);
 
     return {

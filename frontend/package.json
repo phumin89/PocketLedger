@@ -5,10 +5,12 @@
     "type": "module",
     "scripts": {
         "dev": "vite",
+        "prebuild": "npm --prefix .. run build --workspace @pocketledger/contracts",
         "build": "tsc -b && vite build",
         "preview": "vite preview"
     },
     "dependencies": {
+        "@pocketledger/contracts": "*",
         "react": "^19.1.1",
         "react-dom": "^19.1.1",
         "react-router-dom": "^7.13.1"

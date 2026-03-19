@@ -3,8 +3,10 @@ import { Navigate, Route, Routes } from 'react-router-dom';
 import styles from './App.module.scss';
 import { Navbar } from './components/Navbar/Navbar';
 import { OverviewPage } from './components/OverviewPage/OverviewPage';
+import { buildOverviewData } from './components/OverviewPage/buildOverviewData';
 import { navItems } from './content/home-content';
 import { overviewMock } from './content/overview-mock';
+import { useCurrentUser } from './hooks/useCurrentUser';
 import { TransactionsStoreProvider } from './hooks/useTransactionsStore';
 
 const DashboardPage = lazy(async () => {
@@ -26,6 +28,18 @@ const EditTransactionPage = lazy(async () => {
 });
 
 export default function App() {
+    const {
+        currentUser,
+        error: currentUserError,
+        isLoading: isCurrentUserLoading,
+    } = useCurrentUser();
+    const overviewData = buildOverviewData(
+        overviewMock,
+        currentUser,
+        currentUserError,
+        isCurrentUserLoading
+    );
+
     return (
         <main className={styles.page}>
             <TransactionsStoreProvider>
@@ -34,7 +48,7 @@ export default function App() {
                     <section className={styles.canvas}>
                         <Suspense fallback={<RouteLoadingState />}>
                             <Routes>
-                                <Route path="/" element={<OverviewPage data={overviewMock} />} />
+                                <Route path="/" element={<OverviewPage data={overviewData} />} />
                                 <Route path="/overview" element={<Navigate replace to="/" />} />
                                 <Route path="/dashboard" element={<DashboardPage />} />
                                 <Route path="/transactions" element={<TransactionsPage />} />
