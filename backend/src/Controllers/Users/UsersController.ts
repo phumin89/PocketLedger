@@ -1,7 +1,7 @@
 import { CurrentUserQuery, type ICurrentUserResponse } from '@pocketledger/contracts';
 import type { FastifyReply, FastifyRequest } from 'fastify';
 import type { IRequestDispatcher } from '../../CQRS/Contracts/IRequestDispatcher.ts';
-import type { IUsersControllerDependencies } from './IUsersControllerDependencies.ts';
+import type { IUsersControllerDependencies } from './Contracts/IUsersControllerDependencies.ts';
 
 export class UsersController {
     private readonly requestDispatcher: IRequestDispatcher;

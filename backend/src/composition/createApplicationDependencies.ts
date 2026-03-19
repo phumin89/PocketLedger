@@ -4,7 +4,7 @@ import { dbContext, type IDbContext } from '@pocketledger/database';
 import { RequestDispatcher } from '../CQRS/RequestDispatcher.ts';
 import type { IHandlerRegistration } from '../CQRS/Types/HandlerRegistration.ts';
 import { UsersController } from '../Controllers/Users/UsersController.ts';
-import type { IApplicationDependencies } from './IApplicationDependencies.ts';
+import type { IApplicationDependencies } from './Contracts/IApplicationDependencies.ts';
 
 export function createApplicationDependencies(
     database: IDbContext = dbContext

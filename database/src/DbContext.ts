@@ -1,3 +1,3 @@
-import type { IDbContext } from './IDbContext.ts';
+import type { IDbContext } from './Contracts/IDbContext.ts';
 
 export type DbContext = IDbContext;

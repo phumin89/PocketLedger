@@ -2,7 +2,7 @@ import cors from '@fastify/cors';
 import sensible from '@fastify/sensible';
 import Fastify, { type FastifyInstance } from 'fastify';
 import { ZodError } from 'zod';
-import type { IApplicationDependencies } from './composition/IApplicationDependencies.ts';
+import type { IApplicationDependencies } from './composition/Contracts/IApplicationDependencies.ts';
 import { createApplicationDependencies } from './composition/createApplicationDependencies.ts';
 import { createApiRoutes } from './routes/CreateApiRoutes.ts';
 

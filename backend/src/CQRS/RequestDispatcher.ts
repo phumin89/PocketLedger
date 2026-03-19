@@ -1,6 +1,6 @@
 import type { Command, Query, RequestConstructor, RequestResult } from '@pocketledger/contracts';
 import type { IRequestDispatcher } from './Contracts/IRequestDispatcher.ts';
-import type { IRequestDispatcherDependencies } from './IRequestDispatcherDependencies.ts';
+import type { IRequestDispatcherDependencies } from './Contracts/IRequestDispatcherDependencies.ts';
 import type { DispatchableRequest } from './Types/DispatchableRequest.ts';
 import type { IHandlerRegistration } from './Types/HandlerRegistration.ts';
 import type { UntypedHandler } from './Types/UntypedHandler.ts';

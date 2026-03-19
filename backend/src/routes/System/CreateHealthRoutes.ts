@@ -1,7 +1,7 @@
 import type { IDbContext } from '@pocketledger/database';
 import type { FastifyPluginAsync } from 'fastify';
+import type { IHealthRouteDependencies } from './Contracts/IHealthRouteDependencies.ts';
 import type { DatabaseStatus } from './DatabaseStatus.ts';
-import type { IHealthRouteDependencies } from './IHealthRouteDependencies.ts';
 
 async function resolveDatabaseStatus(dbContext: IDbContext): Promise<DatabaseStatus> {
     if (!process.env.DATABASE_URL) {

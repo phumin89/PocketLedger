@@ -84,6 +84,8 @@ PocketLedger/
 - Interfaces use the `I...` prefix consistently across backend, application, and contracts layers.
 - Shared contracts may keep alias exports for compatibility, but the canonical interface names remain `I...`.
 - Backend dependencies are wired explicitly through the composition root instead of hidden singleton registration.
+- Internal backend, application, and database interfaces live in feature-scoped `Contracts/` folders instead of a global `interfaces` directory.
+- Frontend props, state, and other view-local type aliases stay colocated with the component, hook, or content file that owns them.
 
 Key backend folders:
 
@@ -91,6 +93,7 @@ Key backend folders:
 - `backend/src/routes` for Fastify route registration
 - `backend/src/composition` for dependency assembly
 - `backend/src/CQRS` for dispatcher contracts and supporting types
+- Local `Contracts/` folders inside those areas for private wiring interfaces such as dependencies and route/controller contracts
 
 ## Quick Start
 

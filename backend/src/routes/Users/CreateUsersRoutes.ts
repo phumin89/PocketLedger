@@ -1,5 +1,5 @@
 import type { FastifyPluginAsync } from 'fastify';
-import type { IUsersRouteDependencies } from './IUsersRouteDependencies.ts';
+import type { IUsersRouteDependencies } from './Contracts/IUsersRouteDependencies.ts';
 
 const legacyCurrentUserPath = '/queries/users/me';
 const currentUserPath = '/users/me';

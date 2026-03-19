@@ -1,5 +1,5 @@
 import type { IDbContext } from '@pocketledger/database';
-import type { IRequestHandlerDependencies } from './IRequestHandlerDependencies.ts';
+import type { IRequestHandlerDependencies } from './Contracts/IRequestHandlerDependencies.ts';
 
 export abstract class RequestHandler<TRequest, TResponse> {
     protected readonly dbContext: IDbContext;
