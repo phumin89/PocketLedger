@@ -1,5 +1,9 @@
 # PocketLedger
 
+<div align="center">
+
+**CQRS-ready personal finance monorepo built with React, Fastify, Prisma, and PostgreSQL.**
+
 [![React](https://img.shields.io/badge/React-19-61dafb?logo=react&logoColor=white)](https://react.dev/)
 [![Vite](https://img.shields.io/badge/Vite-7-646cff?logo=vite&logoColor=white)](https://vite.dev/)
 [![Fastify](https://img.shields.io/badge/Fastify-5-000000?logo=fastify&logoColor=white)](https://fastify.dev/)
@@ -8,112 +12,147 @@
 [![TypeScript](https://img.shields.io/badge/TypeScript-5-3178c6?logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
 [![Docker](https://img.shields.io/badge/Docker-Compose-2496ed?logo=docker&logoColor=white)](https://www.docker.com/)
 
-PocketLedger is a starter monorepo for an income and expense tracking product. It uses a separate SPA frontend, a REST API backend, an application layer for CQRS handlers, and PostgreSQL for durable financial data.
+[Overview](#overview) • [Architecture](#architecture) • [Workspace Map](#workspace-map) • [Quick Start](#quick-start) • [Docker Dev](#docker-dev)
 
-## Frameworks
+</div>
 
-- Frontend framework: React 19 + Vite
-- Backend framework: Fastify 5
-- ORM and database tooling: Prisma 7
-- Database: PostgreSQL 16
-- Language: TypeScript 5
-- Local orchestration: Docker Compose
+## Overview
 
-## Stack choice
+PocketLedger is a starter monorepo for an income and expense tracking product. The repo is split into a React SPA frontend, a Fastify REST API backend, an application layer for CQRS handlers, shared contracts, and a Prisma-backed PostgreSQL database layer.
 
-- Frontend: React + Vite + TypeScript
-- Backend: Fastify + TypeScript
-- Database: PostgreSQL + Prisma
+The goal is simple: keep the first version easy to navigate while leaving a clean path for richer transaction flows, projections, reporting, and background jobs later.
 
-PostgreSQL is the right default here because financial data is relational, query-heavy, and benefits from strong constraints and decimal-safe storage.
+## Highlights
 
-## CQRS-ready structure
+- React 19 + Vite frontend with a dashboard-style shell
+- Fastify 5 backend with a CQRS entrypoint
+- Shared TypeScript contracts across layers
+- Prisma 7 + PostgreSQL 16 for durable relational data
+- Docker Compose development stack with health checks and watch mode
+- Monorepo workspace layout that keeps boundaries explicit
 
-The codebase is structured so reads and writes are separated from the start:
+## Architecture
 
-- `backend` contains controllers, API contracts, and CQRS request definitions
-- `application` contains command handlers and query handlers
-- `database` contains Prisma schema, models, generated client, and migrations
+```mermaid
+flowchart LR
+    A["React + Vite SPA"] -->|REST /api| B["Fastify API"]
+    B --> C["Controllers + Routes"]
+    C --> D["CQRS Bus"]
+    D --> E["Application Handlers"]
+    E --> F["Prisma Client"]
+    F --> G["PostgreSQL"]
+```
 
-This keeps the first version readable while leaving room for event-driven workflows, background projections, or separate read stores later.
+## Workspace Map
 
-## Project structure
+| Workspace | Responsibility | Notes |
+| --- | --- | --- |
+| `frontend` | React SPA | Dashboard, transactions browser, and editor UI |
+| `backend` | Fastify API | Routes, controllers, app bootstrap, and CQRS dispatch |
+| `application` | CQRS handlers | Query and command handler implementations |
+| `contracts` | Shared contracts | Request and response types shared across layers |
+| `database` | Prisma + DB client | Prisma schema, migrations, generated client, and DB exports |
+| `docker` | Container setup | Dockerfiles used by the local dev stack |
+
+## Current Scope
+
+- Implemented backend endpoints:
+  - `GET /api/health`
+  - `GET /api/users/me`
+  - `GET /api/queries/users/me`
+- Implemented database model:
+  - `User`
+- Frontend status:
+  - Overview and transaction flows are currently mock-driven UI
+  - Health-check plumbing exists for backend connectivity
+
+## Project Structure
 
 ```text
 PocketLedger/
   frontend/     React SPA
   backend/      Fastify API, controllers, CQRS contracts
   application/  CQRS command and query handlers
-  database/     Prisma schema, generated client, migrations
+  contracts/    Shared request and response types
+  database/     Prisma schema, migrations, generated client
+  docker/       Dockerfiles for frontend and backend services
 ```
 
-## Quick start
+## Quick Start
 
-1. Install dependencies:
+1. Install dependencies.
 
-    ```bash
-    npm install
-    ```
+   ```bash
+   npm install
+   ```
 
-2. Copy the backend environment file:
+2. Copy the backend environment file.
 
-    ```bash
-    copy backend\\.env.example backend\\.env
-    ```
+   ```bash
+   copy backend\.env.example backend\.env
+   ```
 
-3. Start PostgreSQL with Docker:
+3. Start PostgreSQL.
 
-    ```bash
-    docker compose up -d
-    ```
+   ```bash
+   docker compose up -d
+   ```
 
-4. Generate Prisma client and run migrations:
+4. Generate the Prisma client and apply migrations.
 
-    ```bash
-    npm run db:generate
-    npm run db:migrate
-    ```
+   ```bash
+   npm run db:generate
+   npm run db:migrate
+   ```
 
-5. Start both apps:
+5. Start frontend and backend.
 
-    ```bash
-    npm run dev
-    ```
+   ```bash
+   npm run dev
+   ```
 
-Frontend runs on `http://localhost:5173` and the API runs on `http://localhost:3000`.
+Local ports:
 
-## Recommended dev mode
+- Frontend: `http://localhost:5173`
+- Backend: `http://localhost:3000`
 
-For this project, the best fit is Docker Compose in dev mode so PostgreSQL, the API, and the SPA all show up as services in Docker Desktop with published ports.
+## Docker Dev
 
-- `npm run dev:docker` starts the full stack with Docker Compose Watch
-- `npm run dev:docker:detached` starts the same stack in the background
-- `npm run dev:docker:down` stops the full Docker dev stack
-- `npm run dev:local` keeps the old local-process workflow for frontend and backend
-- `npm run db:up` starts only PostgreSQL
-- `npm run db:down` stops only PostgreSQL
-- `npm run db:logs` tails PostgreSQL logs
-- `npm run db:studio:docker` starts Prisma Studio in Docker
-
-Docker Desktop will expose:
-
-- Frontend on `http://localhost:4200`
-- Backend on `http://localhost:4201`
-- Prisma Studio on `http://localhost:4202`
-- PostgreSQL on `localhost:5432`
-
-When using Docker dev mode, run:
+For day-to-day development, Docker Compose watch mode is the intended workflow.
 
 ```bash
 npm run dev:docker
 ```
 
-Compose Watch keeps the containers running and syncs source changes for frontend and backend while rebuilding when package or Prisma schema files change.
+Docker Desktop ports:
+
+- Frontend: `http://localhost:4200`
+- Backend: `http://localhost:4201`
+- Prisma Studio: `http://localhost:4202`
+- PostgreSQL: `localhost:5432`
+
+Useful scripts:
+
+- `npm run dev:docker`
+- `npm run dev:docker:detached`
+- `npm run dev:docker:down`
+- `npm run dev:local`
+- `npm run db:up`
+- `npm run db:down`
+- `npm run db:logs`
+- `npm run db:studio:docker`
+
+## Stack Choice
+
+PostgreSQL is the right default here because financial data is relational, query-heavy, and benefits from strong constraints and decimal-safe storage.
+
+- Frontend: React + Vite + TypeScript
+- Backend: Fastify + TypeScript
+- Database: PostgreSQL + Prisma
 
 ## Formatting
 
-The repo uses Prettier at the root so the same formatter applies to TypeScript, HTML, JSON, Markdown, and SCSS.
-It also organizes TypeScript imports automatically during formatting.
+The repo uses root-level Prettier so the same formatter applies across TypeScript, JSON, Markdown, HTML, and SCSS.
 
-- `npm run format` formats the repo
-- `npm run format:check` checks formatting without changing files
+- `npm run format`
+- `npm run format:check`
