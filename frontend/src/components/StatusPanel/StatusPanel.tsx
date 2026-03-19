@@ -1,10 +1,5 @@
-import type { ApiHealth } from '../../lib/api';
 import styles from './StatusPanel.module.scss';
-
-type StatusPanelProps = {
-    apiHealth: ApiHealth | null;
-    error: string | null;
-};
+import type { StatusPanelProps } from './StatusPanelProps.ts';
 
 export function StatusPanel({ apiHealth, error }: StatusPanelProps) {
     const syncedAt = apiHealth ? new Date(apiHealth.timestamp).toLocaleString() : 'Pending';

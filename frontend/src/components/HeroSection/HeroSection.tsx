@@ -1,14 +1,6 @@
-import type { HeroContent } from '../../content/home.types';
-import type { ApiHealth } from '../../lib/api';
 import { StatusPanel } from '../StatusPanel/StatusPanel';
 import styles from './HeroSection.module.scss';
-
-type HeroSectionProps = {
-    id?: string;
-    hero: HeroContent;
-    apiHealth: ApiHealth | null;
-    error: string | null;
-};
+import type { HeroSectionProps } from './HeroSectionProps.ts';
 
 export function HeroSection({ id, hero, apiHealth, error }: HeroSectionProps) {
     return (

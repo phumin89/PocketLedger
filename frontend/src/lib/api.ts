@@ -1,9 +1,4 @@
-export type ApiHealth = {
-    status: string;
-    service: string;
-    database: string;
-    timestamp: string;
-};
+import type { ApiHealth } from './ApiHealth.ts';
 
 export async function fetchApiHealth(): Promise<ApiHealth> {
     const apiBase = import.meta.env.VITE_API_BASE_URL ?? '';

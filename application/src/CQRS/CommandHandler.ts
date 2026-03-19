@@ -1,7 +1,7 @@
-import type { CommandRequest, CommandResponse } from '@pocketledger/contracts';
-import { RequestHandler } from './RequestHandler.js';
+import type { ICommandRequest, ICommandResponse } from '@pocketledger/contracts';
+import { RequestHandler } from './RequestHandler.ts';
 
 export abstract class CommandHandler<
-    TRequest extends CommandRequest<TResponse>,
-    TResponse extends CommandResponse | null,
+    TRequest extends ICommandRequest<TResponse>,
+    TResponse extends ICommandResponse | null,
 > extends RequestHandler<TRequest, TResponse> {}

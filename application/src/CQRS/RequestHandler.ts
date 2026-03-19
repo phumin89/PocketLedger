@@ -1,10 +1,11 @@
-import { dbContext, type IDbContext } from '@pocketledger/database';
+import type { IDbContext } from '@pocketledger/database';
+import type { IRequestHandlerDependencies } from './IRequestHandlerDependencies.ts';
 
 export abstract class RequestHandler<TRequest, TResponse> {
     protected readonly dbContext: IDbContext;
 
-    constructor(context: IDbContext = dbContext) {
-        this.dbContext = context;
+    public constructor({ dbContext }: IRequestHandlerDependencies) {
+        this.dbContext = dbContext;
     }
 
     public abstract execute(request: TRequest): Promise<TResponse>;

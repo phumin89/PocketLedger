@@ -1,4 +1,4 @@
-import type { NavItem } from './home.types';
+import type { NavItem } from './NavItem.ts';
 
 export const navItems: NavItem[] = [
     {

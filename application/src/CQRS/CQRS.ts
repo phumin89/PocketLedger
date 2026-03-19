@@ -1,1 +1,1 @@
-export { RequestHandler as CQRS } from './RequestHandler.js';
+export { RequestHandler as CQRS } from './RequestHandler.ts';

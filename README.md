@@ -78,6 +78,20 @@ PocketLedger/
   docker/       Dockerfiles for frontend and backend services
 ```
 
+## Code Conventions
+
+- Handwritten TypeScript and TSX keep one class, interface, or type declaration per file.
+- Interfaces use the `I...` prefix consistently across backend, application, and contracts layers.
+- Shared contracts may keep alias exports for compatibility, but the canonical interface names remain `I...`.
+- Backend dependencies are wired explicitly through the composition root instead of hidden singleton registration.
+
+Key backend folders:
+
+- `backend/src/Controllers` for controllers only
+- `backend/src/routes` for Fastify route registration
+- `backend/src/composition` for dependency assembly
+- `backend/src/CQRS` for dispatcher contracts and supporting types
+
 ## Quick Start
 
 1. Install dependencies.

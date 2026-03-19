@@ -1,3 +1,4 @@
-export interface CommandResponse {}
-
-export interface ICommandResponse extends CommandResponse {}
+export interface ICommandResponse {
+    success: boolean;
+    messages: string[];
+}

@@ -1,25 +1,52 @@
 import cors from '@fastify/cors';
 import sensible from '@fastify/sensible';
-import { prisma } from '@pocketledger/database';
+import type { FastifyInstance } from 'fastify';
 import Fastify from 'fastify';
 import { ZodError } from 'zod';
-import { apiRoutes } from './routes/index.js';
+import type { IApplicationDependencies } from './composition/IApplicationDependencies.ts';
+import { createApplicationDependencies } from './composition/createApplicationDependencies.ts';
+import { createApiRoutes } from './routes/CreateApiRoutes.ts';
 
-export function buildApp() {
+function resolveAllowedOrigins(frontendOrigin: string | undefined): string[] | true {
+    const allowedOrigins = frontendOrigin
+        ?.split(',')
+        .map((origin) => origin.trim())
+        .filter(Boolean);
+
+    return allowedOrigins && allowedOrigins.length > 0 ? allowedOrigins : true;
+}
+
+function resolveStatusCode(error: unknown): number {
+    if (!error || typeof error !== 'object' || !('statusCode' in error)) {
+        return 500;
+    }
+
+    const { statusCode } = error as { statusCode?: unknown };
+
+    return typeof statusCode === 'number' ? statusCode : 500;
+}
+
+function resolveErrorMessage(error: unknown, statusCode: number): string {
+    if (statusCode >= 500) {
+        return 'Internal server error.';
+    }
+
+    return error instanceof Error ? error.message : 'Request failed.';
+}
+
+export function buildApp(
+    dependencies: IApplicationDependencies = createApplicationDependencies()
+): FastifyInstance {
     const app = Fastify({
         logger: true,
     });
 
-    const origins = process.env.FRONTEND_ORIGIN?.split(',')
-        .map((origin) => origin.trim())
-        .filter(Boolean);
-
     void app.register(cors, {
-        origin: origins && origins.length > 0 ? origins : true,
+        origin: resolveAllowedOrigins(process.env.FRONTEND_ORIGIN),
     });
 
     void app.register(sensible);
-    void app.register(apiRoutes, { prefix: '/api' });
+    void app.register(createApiRoutes(dependencies), { prefix: '/api' });
 
     app.setErrorHandler((error, _request, reply) => {
         if (error instanceof ZodError) {
@@ -32,28 +59,17 @@ export function buildApp() {
             });
         }
 
-        const statusCode =
-            typeof error === 'object' &&
-            error !== null &&
-            'statusCode' in error &&
-            typeof error.statusCode === 'number'
-                ? error.statusCode
-                : 500;
+        const statusCode = resolveStatusCode(error);
 
         app.log.error(error);
 
         return reply.status(statusCode).send({
-            message:
-                statusCode >= 500
-                    ? 'Internal server error.'
-                    : error instanceof Error
-                      ? error.message
-                      : 'Request failed.',
+            message: resolveErrorMessage(error, statusCode),
         });
     });
 
     app.addHook('onClose', async () => {
-        await prisma.$disconnect();
+        await dependencies.dbContext.$disconnect();
     });
 
     return app;

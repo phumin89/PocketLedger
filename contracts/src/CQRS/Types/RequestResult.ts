@@ -1,5 +1,5 @@
-import type { Command } from '../Requests/Command.js';
-import type { Query } from '../Requests/Query.js';
+import type { Command } from '../Requests/Command.ts';
+import type { Query } from '../Requests/Query.ts';
 
 export type RequestResult<TRequest> =
     TRequest extends Command<infer TResult>

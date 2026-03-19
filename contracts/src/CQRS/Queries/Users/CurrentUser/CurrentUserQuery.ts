@@ -1,4 +1,4 @@
-import { Query } from '../../../Requests/Query.js';
-import type { CurrentUserResponse } from './CurrentUserResponse.js';
+import { Query } from '../../../Requests/Query.ts';
+import type { ICurrentUserResponse } from './ICurrentUserResponse.ts';
 
-export class CurrentUserQuery extends Query<CurrentUserResponse | null> {}
+export class CurrentUserQuery extends Query<ICurrentUserResponse | null> {}

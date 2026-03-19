@@ -1,10 +1,7 @@
 import { useEffect, useState } from 'react';
-import { fetchApiHealth, type ApiHealth } from '../lib/api';
-
-type UseApiHealthResult = {
-    apiHealth: ApiHealth | null;
-    error: string | null;
-};
+import type { ApiHealth } from '../lib/ApiHealth.ts';
+import { fetchApiHealth } from '../lib/api';
+import type { UseApiHealthResult } from './UseApiHealthResult.ts';
 
 export function useApiHealth(): UseApiHealthResult {
     const [apiHealth, setApiHealth] = useState<ApiHealth | null>(null);

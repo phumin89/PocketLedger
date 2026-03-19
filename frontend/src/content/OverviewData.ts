@@ -1,26 +1,7 @@
-export type OverviewStat = {
-    label: string;
-    value: string;
-    change: string;
-    tone?: 'neutral' | 'positive';
-};
-
-export type OverviewTrendPoint = {
-    month: string;
-    income: number;
-    expense: number;
-};
-
-export type OverviewCategory = {
-    name: string;
-    amount: string;
-    share: number;
-};
-
-export type OverviewHighlight = {
-    label: string;
-    value: string;
-};
+import type { OverviewCategory } from './OverviewCategory.ts';
+import type { OverviewHighlight } from './OverviewHighlight.ts';
+import type { OverviewStat } from './OverviewStat.ts';
+import type { OverviewTrendPoint } from './OverviewTrendPoint.ts';
 
 export type OverviewData = {
     title: string;

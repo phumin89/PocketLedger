@@ -1,18 +1,6 @@
 import { useEffect, useMemo, useState } from 'react';
-import type { TransactionFormData } from '../content/transaction.types';
-
-type TransactionEditorState = {
-    draft: TransactionFormData;
-    notice: string | null;
-    isDirty: boolean;
-    updateField: <TKey extends keyof TransactionFormData>(
-        field: TKey,
-        value: TransactionFormData[TKey]
-    ) => void;
-    reset: () => void;
-    save: () => void;
-    remove: () => void;
-};
+import type { TransactionFormData } from '../content/TransactionFormData.ts';
+import type { TransactionEditorState } from './TransactionEditorState.ts';
 
 export function useTransactionEditor(
     initialTransaction: TransactionFormData

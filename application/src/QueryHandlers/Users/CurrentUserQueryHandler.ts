@@ -1,24 +1,22 @@
-import { CurrentUserQuery, CurrentUserResponse } from '@pocketledger/contracts';
-import { DatabaseUserModel } from '@pocketledger/database';
-import { QueryHandler } from '../../CQRS/QueryHandler.js';
+import { CurrentUserQuery, type ICurrentUserResponse } from '@pocketledger/contracts';
+import type { DatabaseUserModel } from '@pocketledger/database';
+import { QueryHandler } from '../../CQRS/QueryHandler.ts';
 
 export class CurrentUserQueryHandler extends QueryHandler<
     CurrentUserQuery,
-    CurrentUserResponse | null
+    ICurrentUserResponse | null
 > {
-    static readonly handles = CurrentUserQuery;
-
-    async execute(_query: CurrentUserQuery): Promise<CurrentUserResponse | null> {
+    public override async execute(_query: CurrentUserQuery): Promise<ICurrentUserResponse | null> {
         const user = await this.dbContext.user.findFirst({
             orderBy: {
                 createdAt: 'asc',
             },
         });
 
-        return user ? this.mapUser(user) : null;
+        return user ? this.mapUserToResponse(user) : null;
     }
 
-    private mapUser(user: DatabaseUserModel): CurrentUserResponse {
+    private mapUserToResponse(user: DatabaseUserModel): ICurrentUserResponse {
         return {
             id: user.id,
             email: user.email,

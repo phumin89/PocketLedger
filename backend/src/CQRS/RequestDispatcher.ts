@@ -1,33 +1,34 @@
-import * as applicationHandlers from '@pocketledger/application';
 import type { Command, Query, RequestConstructor, RequestResult } from '@pocketledger/contracts';
-import type { IRequestDispatcher } from './Contracts/IRequestDispatcher.js';
-import type { HandlerInstance } from './Types/HandlerInstance.js';
-import type { RegisteredHandlerClass } from './Types/RegisteredHandlerClass.js';
+import type { IRequestDispatcher } from './Contracts/IRequestDispatcher.ts';
+import type { IRequestDispatcherDependencies } from './IRequestDispatcherDependencies.ts';
+import type { DispatchableRequest } from './Types/DispatchableRequest.ts';
+import type { IHandlerRegistration } from './Types/HandlerRegistration.ts';
+import type { UntypedHandler } from './Types/UntypedHandler.ts';
 
 export class RequestDispatcher implements IRequestDispatcher {
-    private readonly handlers = new Map<RequestConstructor, HandlerInstance<unknown, unknown>>();
+    private readonly handlersByRequestType = new Map<RequestConstructor<object>, UntypedHandler>();
 
-    constructor(availableHandlers: Record<string, unknown> = applicationHandlers) {
-        this.registerHandlers(availableHandlers);
+    public constructor({ registrations }: IRequestDispatcherDependencies) {
+        this.registerHandlers(registrations);
     }
 
-    async executeCommand<TCommand extends Command<unknown>>(
+    public async executeCommand<TCommand extends Command<unknown>>(
         command: TCommand
     ): Promise<RequestResult<TCommand>> {
         return this.execute(command);
     }
 
-    async executeQuery<TQuery extends Query<unknown>>(
+    public async executeQuery<TQuery extends Query<unknown>>(
         query: TQuery
     ): Promise<RequestResult<TQuery>> {
         return this.execute(query);
     }
 
-    private async execute<TRequest extends Command<unknown> | Query<unknown>>(
+    private async execute<TRequest extends DispatchableRequest>(
         request: TRequest
     ): Promise<RequestResult<TRequest>> {
-        const requestType = this.getRequestType(request);
-        const handler = this.handlers.get(requestType);
+        const requestType = this.resolveRequestType(request);
+        const handler = this.handlersByRequestType.get(requestType);
 
         if (!handler) {
             throw new Error(`No handler registered for '${requestType.name}'.`);
@@ -36,23 +37,17 @@ export class RequestDispatcher implements IRequestDispatcher {
         return handler.execute(request) as Promise<RequestResult<TRequest>>;
     }
 
-    private registerHandlers(availableHandlers: Record<string, unknown>) {
-        for (const exportedValue of Object.values(availableHandlers)) {
-            if (!this.isRegisteredHandlerClass(exportedValue)) {
-                continue;
-            }
-
-            const requestType = exportedValue.handles;
-
-            if (this.handlers.has(requestType)) {
+    private registerHandlers(registrations: readonly IHandlerRegistration[]): void {
+        for (const { requestType, handler } of registrations) {
+            if (this.handlersByRequestType.has(requestType)) {
                 throw new Error(`Duplicate handler registration for '${requestType.name}'.`);
             }
 
-            this.handlers.set(requestType, new exportedValue());
+            this.handlersByRequestType.set(requestType, handler);
         }
     }
 
-    private getRequestType<TRequest extends object>(
+    private resolveRequestType<TRequest extends DispatchableRequest>(
         request: TRequest
     ): RequestConstructor<TRequest> {
         if (!request || typeof request !== 'object') {
@@ -67,24 +62,4 @@ export class RequestDispatcher implements IRequestDispatcher {
 
         return requestType as RequestConstructor<TRequest>;
     }
-
-    private isRegisteredHandlerClass(value: unknown): value is RegisteredHandlerClass {
-        if (typeof value !== 'function') {
-            return false;
-        }
-
-        if (
-            !('handles' in value) ||
-            typeof (value as { handles?: unknown }).handles !== 'function'
-        ) {
-            return false;
-        }
-
-        return (
-            typeof (value as { prototype?: { execute?: unknown } }).prototype?.execute ===
-            'function'
-        );
-    }
 }
-
-export const requestDispatcher: IRequestDispatcher = new RequestDispatcher();

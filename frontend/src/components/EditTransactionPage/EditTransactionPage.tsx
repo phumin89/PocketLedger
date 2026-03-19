@@ -1,6 +1,6 @@
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { buildTransactionEditorData } from '../../content/transaction-mock';
-import type { TransactionTypeOption } from '../../content/transaction.types';
+import type { TransactionTypeOption } from '../../content/TransactionTypeOption.ts';
 import { useTransactionEditor } from '../../hooks/useTransactionEditor';
 import { useTransactionsStore } from '../../hooks/useTransactionsStore';
 import styles from './EditTransactionPage.module.scss';
