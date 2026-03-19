@@ -1,0 +1,4 @@
+dist/** linguist-generated=true
+database/src/generated/** linguist-generated=true
+database/prisma/migrations/** linguist-generated=true
+package-lock.json linguist-generated=true

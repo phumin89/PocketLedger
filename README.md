@@ -1,6 +1,23 @@
 # PocketLedger
 
+[![React](https://img.shields.io/badge/React-19-61dafb?logo=react&logoColor=white)](https://react.dev/)
+[![Vite](https://img.shields.io/badge/Vite-7-646cff?logo=vite&logoColor=white)](https://vite.dev/)
+[![Fastify](https://img.shields.io/badge/Fastify-5-000000?logo=fastify&logoColor=white)](https://fastify.dev/)
+[![Prisma](https://img.shields.io/badge/Prisma-7-2d3748?logo=prisma&logoColor=white)](https://www.prisma.io/)
+[![PostgreSQL](https://img.shields.io/badge/PostgreSQL-16-336791?logo=postgresql&logoColor=white)](https://www.postgresql.org/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5-3178c6?logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
+[![Docker](https://img.shields.io/badge/Docker-Compose-2496ed?logo=docker&logoColor=white)](https://www.docker.com/)
+
 PocketLedger is a starter monorepo for an income and expense tracking product. It uses a separate SPA frontend, a REST API backend, an application layer for CQRS handlers, and PostgreSQL for durable financial data.
+
+## Frameworks
+
+- Frontend framework: React 19 + Vite
+- Backend framework: Fastify 5
+- ORM and database tooling: Prisma 7
+- Database: PostgreSQL 16
+- Language: TypeScript 5
+- Local orchestration: Docker Compose
 
 ## Stack choice
 
