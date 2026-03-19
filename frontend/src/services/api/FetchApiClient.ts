@@ -6,7 +6,10 @@ export class FetchApiClient implements IApiClient {
         path: string,
         requestInit?: RequestInit
     ): Promise<TResponse> {
-        const response = await fetch(this.buildApiUrl(path), requestInit);
+        const response = await fetch(this.buildApiUrl(path), {
+            ...requestInit,
+            credentials: requestInit?.credentials ?? 'include',
+        });
 
         if (!response.ok) {
             throw await this.createApiError(response);
@@ -28,7 +31,7 @@ export class FetchApiClient implements IApiClient {
     }
 
     private async createApiError(failedResponse: Response): Promise<ApiError> {
-        const fallbackMessage = `PocketLedger API returned ${failedResponse.status}.`;
+        const fallbackMessage = `Pocket ledger API returned ${failedResponse.status}.`;
         const contentType = failedResponse.headers.get('content-type');
 
         if (contentType?.includes('application/json')) {

@@ -11,6 +11,8 @@ export class UsersService implements IUsersService {
     }
 
     public getCurrentUser(signal?: AbortSignal): Promise<ICurrentUserResponse> {
-        return this.apiClient.requestJson<ICurrentUserResponse>('/api/users/me', { signal });
+        return this.apiClient.requestJson<ICurrentUserResponse>('/api/users/current-user', {
+            signal,
+        });
     }
 }

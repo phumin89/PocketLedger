@@ -27,6 +27,14 @@ services:
             HOST: 0.0.0.0
             FRONTEND_ORIGIN: http://localhost:4200
             DATABASE_URL: postgresql://postgres:postgres@postgres:5432/pocketledger?schema=public
+            AUTH_SESSION_COOKIE_NAME: pocketledger_session
+            AUTH_SESSION_MAX_AGE_SECONDS: 604800
+            AUTH_DEV_USER_ENABLED: 'true'
+            AUTH_DEV_USERNAME: demo
+            AUTH_DEV_USER_EMAIL: demo@pocketledger.local
+            AUTH_DEV_USER_PASSWORD: demo12345
+            AUTH_DEV_USER_FIRST_NAME: Pocket
+            AUTH_DEV_USER_LAST_NAME: Ledger
         ports:
             - '4201:3000'
         depends_on:

@@ -1,6 +1,7 @@
 import { Suspense, lazy } from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
 import styles from './App.module.scss';
+import { LoginPage } from './components/LoginPage/LoginPage';
 import { Navbar } from './components/Navbar/Navbar';
 import { OverviewPage } from './components/OverviewPage/OverviewPage';
 import { buildOverviewData } from './components/OverviewPage/buildOverviewData';
@@ -31,7 +32,9 @@ export default function App() {
     const {
         currentUser,
         error: currentUserError,
+        isAuthenticated,
         isLoading: isCurrentUserLoading,
+        refreshCurrentUser,
     } = useCurrentUser();
     const overviewData = buildOverviewData(
         overviewMock,
@@ -39,6 +42,36 @@ export default function App() {
         currentUserError,
         isCurrentUserLoading
     );
+
+    if (isCurrentUserLoading) {
+        return (
+            <main className={styles.page}>
+                <section className={styles.placeholder}>
+                    <p className={styles.placeholderKicker}>Loading session</p>
+                    <h1 className={styles.placeholderTitle}>Checking your account</h1>
+                    <p className={styles.placeholderText}>
+                        Pocket ledger is validating the active session.
+                    </p>
+                </section>
+            </main>
+        );
+    }
+
+    if (!isAuthenticated) {
+        return (
+            <main className={styles.page}>
+                <Suspense fallback={<RouteLoadingState />}>
+                    <Routes>
+                        <Route
+                            path="/login"
+                            element={<LoginPage onLoginSuccess={refreshCurrentUser} />}
+                        />
+                        <Route path="*" element={<Navigate replace to="/login" />} />
+                    </Routes>
+                </Suspense>
+            </main>
+        );
+    }
 
     return (
         <main className={styles.page}>
@@ -49,6 +82,7 @@ export default function App() {
                         <Suspense fallback={<RouteLoadingState />}>
                             <Routes>
                                 <Route path="/" element={<OverviewPage data={overviewData} />} />
+                                <Route path="/login" element={<Navigate replace to="/" />} />
                                 <Route path="/overview" element={<Navigate replace to="/" />} />
                                 <Route path="/dashboard" element={<DashboardPage />} />
                                 <Route path="/transactions" element={<TransactionsPage />} />

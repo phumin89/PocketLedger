@@ -1,7 +1,9 @@
-import type { IDbContext } from '@pocketledger/database';
-import type { UsersController } from '../../Controllers/Users/UsersController.ts';
+import type { AuthRouteRegistrar } from '../Auth/AuthRouteRegistrar.ts';
+import type { HealthRouteRegistrar } from '../System/HealthRouteRegistrar.ts';
+import type { UsersRouteRegistrar } from '../Users/UsersRouteRegistrar.ts';
 
 export interface IApiRouteDependencies {
-    readonly dbContext: IDbContext;
-    readonly usersController: UsersController;
+    readonly authRouteRegistrar: AuthRouteRegistrar;
+    readonly healthRouteRegistrar: HealthRouteRegistrar;
+    readonly usersRouteRegistrar: UsersRouteRegistrar;
 }

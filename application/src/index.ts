@@ -1,3 +1,5 @@
+export * from './Auth/Contracts/IPasswordHashingService.ts';
+export * from './CommandHandlers/Auth/Login/LoginCommandHandler.ts';
 export * from './CQRS/CommandHandler.ts';
 export * from './CQRS/CQRS.ts';
 export * from './CQRS/QueryHandler.ts';

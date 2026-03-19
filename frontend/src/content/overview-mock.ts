@@ -1,14 +1,14 @@
 import type { OverviewData } from './OverviewData';
 
 export const overviewMock: OverviewData = {
-    title: 'Overview',
-    subtitle: 'Mocked summary for a clean finance dashboard layout.',
+    title: 'Your money at a glance',
+    subtitle: 'A quick read on income, spending, and savings across the year.',
     year: '2026',
     profile: {
         firstName: 'Narin',
         lastName: 'Srisawat',
         occupation: 'Product Designer',
-        status: 'Mock profile',
+        status: 'Sample profile',
     },
     stats: [
         {

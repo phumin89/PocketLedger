@@ -110,10 +110,10 @@ export function DashboardPage() {
             <header className={styles.header}>
                 <div>
                     <p className={styles.kicker}>Dashboard</p>
-                    <h1 className={styles.title}>Quick financial snapshot</h1>
+                    <h1 className={styles.title}>This month at a glance</h1>
                     <p className={styles.subtitle}>
-                        Rough dashboard using the same mock transaction store as the editor and
-                        browser pages.
+                        A quick read on recent activity, bigger spending buckets, and how the last
+                        few months are trending.
                     </p>
                 </div>
 
@@ -135,7 +135,7 @@ export function DashboardPage() {
                 <article className={styles.panel}>
                     <div className={styles.panelHeader}>
                         <p className={styles.panelKicker}>Recent activity</p>
-                        <strong>Latest transactions</strong>
+                        <strong>Most recent entries</strong>
                     </div>
                     <div className={styles.transactionList}>
                         {dashboard.recentTransactions.map((transaction) => (
@@ -157,8 +157,8 @@ export function DashboardPage() {
 
                 <article className={styles.panel}>
                     <div className={styles.panelHeader}>
-                        <p className={styles.panelKicker}>Category focus</p>
-                        <strong>Top expense groups</strong>
+                        <p className={styles.panelKicker}>Spending mix</p>
+                        <strong>Largest expense categories</strong>
                     </div>
                     <div className={styles.categoryList}>
                         {dashboard.expenseByCategory.map((category) => (
@@ -181,7 +181,7 @@ export function DashboardPage() {
                 <article className={styles.panelWide}>
                     <div className={styles.panelHeader}>
                         <p className={styles.panelKicker}>Trend</p>
-                        <strong>Last 4 months</strong>
+                        <strong>Last four months</strong>
                     </div>
                     <div className={styles.trendGrid}>
                         {dashboard.monthlyTrend.map((item) => (

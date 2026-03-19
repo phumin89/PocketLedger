@@ -15,56 +15,58 @@ export function useCurrentUser(
 
     useEffect(() => {
         const abortController = new AbortController();
-        let isActive = true;
 
-        async function loadCurrentUser() {
-            try {
-                const user = await usersService.getCurrentUser(abortController.signal);
-                if (!isActive) {
-                    return;
-                }
-
-                setCurrentUser(user);
-                setError(null);
-            } catch (loadError) {
-                if (loadError instanceof DOMException && loadError.name === 'AbortError') {
-                    return;
-                }
-
-                if (!isActive) {
-                    return;
-                }
-
-                if (loadError instanceof ApiError && loadError.statusCode === 404) {
-                    setError('No user record was found yet. Showing fallback overview data.');
-                    setCurrentUser(null);
-                    return;
-                }
-
-                setError(
-                    loadError instanceof Error
-                        ? loadError.message
-                        : 'PocketLedger user service is not reachable.'
-                );
-                setCurrentUser(null);
-            } finally {
-                if (isActive) {
-                    setIsLoading(false);
-                }
-            }
-        }
-
-        void loadCurrentUser();
+        void loadCurrentUser(abortController.signal);
 
         return () => {
-            isActive = false;
             abortController.abort();
         };
     }, [usersService]);
 
+    async function refreshCurrentUser(): Promise<void> {
+        await loadCurrentUser();
+    }
+
+    async function loadCurrentUser(signal?: AbortSignal): Promise<void> {
+        setIsLoading(true);
+
+        try {
+            const user = await usersService.getCurrentUser(signal);
+            setCurrentUser(user);
+            setError(null);
+        } catch (loadError) {
+            if (loadError instanceof DOMException && loadError.name === 'AbortError') {
+                return;
+            }
+
+            if (loadError instanceof ApiError && loadError.statusCode === 401) {
+                setCurrentUser(null);
+                setError(null);
+                return;
+            }
+
+            if (loadError instanceof ApiError && loadError.statusCode === 404) {
+                setError('No user record was found for the active session.');
+                setCurrentUser(null);
+                return;
+            }
+
+            setError(
+                loadError instanceof Error
+                    ? loadError.message
+                    : 'Pocket ledger user service is not reachable.'
+            );
+            setCurrentUser(null);
+        } finally {
+            setIsLoading(false);
+        }
+    }
+
     return {
         currentUser,
         error,
+        isAuthenticated: currentUser !== null,
         isLoading,
+        refreshCurrentUser,
     };
 }

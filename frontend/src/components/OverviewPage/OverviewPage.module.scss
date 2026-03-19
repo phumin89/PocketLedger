@@ -18,20 +18,21 @@
     font-weight: 600;
     letter-spacing: 0.08em;
     text-transform: uppercase;
-    color: #6b7280;
+    color: var(--warm-accent-strong);
 }
 
 .title {
     margin: 0;
-    font-family: 'Space Grotesk', sans-serif;
+    font-family: var(--font-display);
     font-size: clamp(2rem, 3vw, 2.8rem);
-    line-height: 1;
-    color: #111827;
+    line-height: 1.02;
+    letter-spacing: -0.03em;
+    color: var(--text-strong);
 }
 
 .subtitle {
     margin: 0.55rem 0 0;
-    color: #6b7280;
+    color: var(--text-soft);
 }
 
 .statsGrid {
@@ -43,9 +44,10 @@
 .statCard,
 .profileCard,
 .panel {
-    border: 1px solid #eef1f4;
-    border-radius: 24px;
-    background: #ffffff;
+    border: 1px solid var(--stroke);
+    border-radius: var(--radius-card);
+    background: var(--surface);
+    box-shadow: var(--shadow-card);
 }
 
 .statCard {
@@ -54,16 +56,16 @@
 
 .statLabel {
     margin: 0;
-    color: #6b7280;
+    color: var(--muted);
     font-size: 0.88rem;
 }
 
 .statValue {
     margin: 0.65rem 0 0;
-    font-family: 'Space Grotesk', sans-serif;
+    font-family: var(--font-display);
     font-size: 1.7rem;
     line-height: 1.05;
-    color: #111827;
+    color: var(--text-strong);
 }
 
 .statChange,
@@ -73,11 +75,11 @@
 }
 
 .statChange {
-    color: #6b7280;
+    color: var(--muted);
 }
 
 .statChangePositive {
-    color: #0f766e;
+    color: var(--growth);
 }
 
 .mainGrid {
@@ -102,22 +104,23 @@
     place-items: center;
     width: 3.5rem;
     height: 3.5rem;
-    border-radius: 18px;
-    background: #111827;
-    color: #ffffff;
-    font-family: 'Space Grotesk', sans-serif;
+    border-radius: var(--radius-card);
+    border: 1px solid var(--accent-strong);
+    background: var(--accent);
+    color: var(--on-accent);
+    font-family: var(--font-display);
     font-weight: 700;
 }
 
 .profileName {
     margin: 0;
     font-size: 1.35rem;
-    color: #111827;
+    color: var(--text-strong);
 }
 
 .profileMeta {
     margin: 0.3rem 0 0;
-    color: #6b7280;
+    color: var(--muted);
 }
 
 .profileFacts {
@@ -128,13 +131,13 @@
 }
 
 .profileFacts dt {
-    color: #6b7280;
+    color: var(--muted);
     font-size: 0.82rem;
 }
 
 .profileFacts dd {
     margin: 0.35rem 0 0;
-    color: #111827;
+    color: var(--text-strong);
     font-weight: 700;
 }
 
@@ -148,15 +151,15 @@
     justify-content: space-between;
     gap: 1rem;
     padding-top: 0.85rem;
-    border-top: 1px solid #f3f4f6;
+    border-top: 1px solid var(--stroke);
 }
 
 .highlightRow span {
-    color: #6b7280;
+    color: var(--muted);
 }
 
 .highlightRow strong {
-    color: #111827;
+    color: var(--text-strong);
     text-align: right;
 }
 
@@ -177,13 +180,13 @@
     font-size: 0.8rem;
     text-transform: uppercase;
     letter-spacing: 0.08em;
-    color: #6b7280;
+    color: var(--warm-accent-strong);
 }
 
 .panelTitle {
     margin: 0.35rem 0 0;
     font-size: 1.2rem;
-    color: #111827;
+    color: var(--text-strong);
 }
 
 .chart {
@@ -199,7 +202,7 @@
 }
 
 .chartLabel {
-    color: #6b7280;
+    color: var(--muted);
     font-size: 0.9rem;
 }
 
@@ -215,11 +218,11 @@
 }
 
 .incomeBar {
-    background: #111827;
+    background: var(--growth-strong);
 }
 
 .expenseBar {
-    background: #d1d5db;
+    background: var(--expense);
 }
 
 .categoryList {
@@ -240,12 +243,12 @@
 }
 
 .categoryCopy strong {
-    color: #111827;
+    color: var(--text-strong);
 }
 
 .categoryCopy span,
 .categoryShare {
-    color: #6b7280;
+    color: var(--muted);
     font-size: 0.9rem;
 }
 
@@ -253,13 +256,13 @@
     overflow: hidden;
     height: 0.65rem;
     border-radius: 999px;
-    background: #f3f4f6;
+    background: var(--track);
 }
 
 .categoryFill {
     height: 100%;
     border-radius: inherit;
-    background: #111827;
+    background: var(--growth);
 }
 
 @media (max-width: 1080px) {
@@ -289,12 +292,7 @@
     .statCard,
     .profileCard,
     .panel {
-        border-radius: 20px;
-    }
-
-    .statCard,
-    .profileCard,
-    .panel {
+        border-radius: var(--radius-card);
         padding: 1rem;
     }
 

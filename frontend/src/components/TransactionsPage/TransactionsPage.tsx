@@ -95,10 +95,10 @@ export function TransactionsPage() {
             <header className={styles.header}>
                 <div>
                     <p className={styles.kicker}>Transactions</p>
-                    <h1 className={styles.title}>Browse by year, month, and day</h1>
+                    <h1 className={styles.title}>Find transactions by date</h1>
                     <p className={styles.subtitle}>
-                        Start from the year selector, choose a month, then inspect or edit the
-                        transactions for a specific day.
+                        Start with the year, narrow it down by month, then open the day you want to
+                        review.
                     </p>
                 </div>
 
@@ -153,9 +153,7 @@ export function TransactionsPage() {
                                 )}
                             </strong>
                         </div>
-                        <span className={styles.helperText}>
-                            Pick a day to inspect transactions
-                        </span>
+                        <span className={styles.helperText}>Pick a day to see the entries</span>
                     </div>
 
                     <div className={styles.daysGrid}>
@@ -196,8 +194,8 @@ export function TransactionsPage() {
 
                     {selectedDayTransactions.length === 0 ? (
                         <div className={styles.emptyState}>
-                            <h2>No transactions on this day</h2>
-                            <p>Create a mock transaction first, then edit the details.</p>
+                            <h2>Nothing recorded for this day yet</h2>
+                            <p>Create a sample transaction to start filling it in.</p>
                         </div>
                     ) : (
                         <div className={styles.transactionList}>
@@ -218,7 +216,7 @@ export function TransactionsPage() {
                                         </strong>
                                     </div>
                                     <p className={styles.transactionNote}>
-                                        {transaction.note || 'No note'}
+                                        {transaction.note || 'No note added'}
                                     </p>
                                     <div className={styles.transactionActions}>
                                         <button

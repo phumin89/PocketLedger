@@ -11,6 +11,6 @@ export class SystemService implements ISystemService {
     }
 
     public getApiHealth(signal?: AbortSignal): Promise<ApiHealth> {
-        return this.apiClient.requestJson<ApiHealth>('/api/health', { signal });
+        return this.apiClient.requestJson<ApiHealth>('/api/health/status', { signal });
     }
 }

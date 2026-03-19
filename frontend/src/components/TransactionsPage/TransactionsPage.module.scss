@@ -15,7 +15,7 @@
 .kicker,
 .sectionKicker {
     margin: 0 0 0.4rem;
-    color: #6b7280;
+    color: var(--warm-accent-strong);
     font-size: 0.82rem;
     font-weight: 600;
     letter-spacing: 0.08em;
@@ -24,16 +24,17 @@
 
 .title {
     margin: 0;
-    font-family: 'Space Grotesk', sans-serif;
+    font-family: var(--font-display);
     font-size: clamp(2rem, 3vw, 2.8rem);
-    line-height: 1;
-    color: #111827;
+    line-height: 1.02;
+    letter-spacing: -0.03em;
+    color: var(--text-strong);
 }
 
 .subtitle {
     max-width: 64ch;
     margin: 0.65rem 0 0;
-    color: #6b7280;
+    color: var(--text-soft);
 }
 
 .yearPicker {
@@ -43,17 +44,17 @@
 }
 
 .yearPicker span {
-    color: #6b7280;
+    color: var(--muted);
     font-size: 0.88rem;
 }
 
 .yearPicker select {
     height: 3rem;
-    border: 1px solid #e5e7eb;
-    border-radius: 16px;
+    border: 1px solid var(--stroke);
+    border-radius: var(--radius-control);
     padding: 0 1rem;
-    background: #ffffff;
-    color: #111827;
+    background: var(--surface-strong);
+    color: var(--text-strong);
 }
 
 .grid {
@@ -65,14 +66,10 @@
 .monthsCard,
 .daysCard,
 .listCard {
-    border: 1px solid #eef1f4;
-    border-radius: 24px;
-    background: #ffffff;
-}
-
-.monthsCard,
-.daysCard,
-.listCard {
+    border: 1px solid var(--stroke);
+    border-radius: var(--radius-card);
+    background: var(--surface);
+    box-shadow: var(--shadow-card);
     padding: 1.25rem;
 }
 
@@ -87,7 +84,7 @@
 
 .sectionHeader strong,
 .listHeader strong {
-    color: #111827;
+    color: var(--text-strong);
 }
 
 .monthList,
@@ -100,8 +97,8 @@
 .monthButtonActive,
 .dayButton,
 .dayButtonActive {
-    border: 1px solid #eef1f4;
-    background: #ffffff;
+    border: 1px solid var(--stroke);
+    background: var(--surface-strong);
     cursor: pointer;
 }
 
@@ -112,23 +109,23 @@
     justify-content: space-between;
     width: 100%;
     padding: 0.9rem 1rem;
-    border-radius: 16px;
-    color: #111827;
+    border-radius: var(--radius-control);
+    color: var(--text-strong);
 }
 
 .monthButton small,
 .monthButtonActive small {
-    color: #6b7280;
+    color: var(--muted);
 }
 
 .monthButtonActive,
 .dayButtonActive {
-    border-color: #d7dce2;
-    background: #f9fafb;
+    border-color: var(--accent);
+    background: var(--accent-soft);
 }
 
 .helperText {
-    color: #6b7280;
+    color: var(--muted);
     font-size: 0.88rem;
 }
 
@@ -145,28 +142,28 @@
     align-content: start;
     min-height: 4.6rem;
     padding: 0.8rem;
-    border-radius: 16px;
+    border-radius: var(--radius-control);
     text-align: left;
 }
 
 .dayButton strong,
 .dayButtonActive strong {
-    color: #111827;
+    color: var(--text-strong);
 }
 
 .dayButton small,
 .dayButtonActive small {
-    color: #6b7280;
+    color: var(--muted);
     font-size: 0.78rem;
 }
 
 .addButton {
     height: 2.8rem;
     padding: 0 1rem;
-    border: 0;
-    border-radius: 999px;
-    background: #111827;
-    color: #ffffff;
+    border: 1px solid var(--accent-strong);
+    border-radius: var(--radius-control);
+    background: var(--accent);
+    color: var(--on-accent);
     cursor: pointer;
 }
 
@@ -174,15 +171,16 @@
     display: grid;
     place-items: center;
     min-height: 18rem;
-    border: 1px dashed #e5e7eb;
-    border-radius: 20px;
+    border: 1px dashed var(--stroke-strong);
+    border-radius: var(--radius-card);
     text-align: center;
-    color: #6b7280;
+    color: var(--muted);
+    background: var(--surface-soft);
 }
 
 .emptyState h2 {
     margin: 0;
-    color: #111827;
+    color: var(--text-strong);
 }
 
 .emptyState p {
@@ -190,9 +188,10 @@
 }
 
 .transactionItem {
-    border: 1px solid #eef1f4;
-    border-radius: 20px;
+    border: 1px solid var(--stroke);
+    border-radius: var(--radius-card);
     padding: 1rem;
+    background: var(--surface-strong);
 }
 
 .transactionMain {
@@ -205,12 +204,12 @@
 .transactionTitle {
     margin: 0;
     font-size: 1.05rem;
-    color: #111827;
+    color: var(--text-strong);
 }
 
 .transactionMeta,
 .transactionNote {
-    color: #6b7280;
+    color: var(--muted);
 }
 
 .transactionMeta {
@@ -222,7 +221,7 @@
 }
 
 .transactionAmount {
-    color: #111827;
+    color: var(--text-strong);
     white-space: nowrap;
 }
 
@@ -236,20 +235,20 @@
 .inlineButtonDanger {
     height: 2.5rem;
     padding: 0 0.95rem;
-    border-radius: 999px;
+    border-radius: var(--radius-control);
     cursor: pointer;
 }
 
 .inlineButton {
-    border: 1px solid #d7dce2;
-    background: #ffffff;
-    color: #111827;
+    border: 1px solid var(--stroke-strong);
+    background: var(--surface-strong);
+    color: var(--text-strong);
 }
 
 .inlineButtonDanger {
-    border: 0;
-    background: #f3f4f6;
-    color: #111827;
+    border: 1px solid var(--danger-stroke);
+    background: var(--danger-soft);
+    color: var(--danger-strong);
 }
 
 @media (max-width: 1180px) {
@@ -289,7 +288,7 @@
     .daysCard,
     .listCard,
     .transactionItem {
-        border-radius: 20px;
+        border-radius: var(--radius-card);
     }
 
     .monthsCard,

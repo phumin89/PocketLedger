@@ -8,7 +8,7 @@ export function StatusPanel({ apiHealth, error }: StatusPanelProps) {
         <aside className={styles.panel}>
             <div className={styles.header}>
                 <p className={styles.eyebrow}>System pulse</p>
-                <h2 className={styles.title}>PocketLedger status</h2>
+                <h2 className={styles.title}>Pocket ledger status</h2>
             </div>
             <div className={styles.row}>
                 <span className={styles.label}>API status</span>
