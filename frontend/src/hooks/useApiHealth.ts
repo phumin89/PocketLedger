@@ -1,9 +1,11 @@
 import { useEffect, useState } from 'react';
+import { frontendServices } from '../composition/frontendServices';
 import type { ApiHealth } from '../services/system/ApiHealth';
-import { getApiHealth } from '../services/system/getApiHealth';
+import type { IUseApiHealthDependencies } from './Contracts/IUseApiHealthDependencies';
 import type { UseApiHealthResult } from './UseApiHealthResult';
 
-export function useApiHealth(): UseApiHealthResult {
+export function useApiHealth(dependencies: IUseApiHealthDependencies = {}): UseApiHealthResult {
+    const systemService = dependencies.systemService ?? frontendServices.systemService;
     const [apiHealth, setApiHealth] = useState<ApiHealth | null>(null);
     const [error, setError] = useState<string | null>(null);
 
@@ -13,7 +15,7 @@ export function useApiHealth(): UseApiHealthResult {
 
         async function loadHealth() {
             try {
-                const health = await getApiHealth(abortController.signal);
+                const health = await systemService.getApiHealth(abortController.signal);
                 if (!isActive) {
                     return;
                 }
@@ -43,7 +45,7 @@ export function useApiHealth(): UseApiHealthResult {
             isActive = false;
             abortController.abort();
         };
-    }, []);
+    }, [systemService]);
 
     return {
         apiHealth,

@@ -1,10 +1,14 @@
 import type { ICurrentUserResponse } from '@pocketledger/contracts';
 import { useEffect, useState } from 'react';
+import { frontendServices } from '../composition/frontendServices';
 import { ApiError } from '../services/api/ApiError';
-import { getCurrentUser } from '../services/users/getCurrentUser';
+import type { IUseCurrentUserDependencies } from './Contracts/IUseCurrentUserDependencies';
 import type { UseCurrentUserResult } from './UseCurrentUserResult';
 
-export function useCurrentUser(): UseCurrentUserResult {
+export function useCurrentUser(
+    dependencies: IUseCurrentUserDependencies = {}
+): UseCurrentUserResult {
+    const usersService = dependencies.usersService ?? frontendServices.usersService;
     const [currentUser, setCurrentUser] = useState<ICurrentUserResponse | null>(null);
     const [error, setError] = useState<string | null>(null);
     const [isLoading, setIsLoading] = useState(true);
@@ -15,7 +19,7 @@ export function useCurrentUser(): UseCurrentUserResult {
 
         async function loadCurrentUser() {
             try {
-                const user = await getCurrentUser(abortController.signal);
+                const user = await usersService.getCurrentUser(abortController.signal);
                 if (!isActive) {
                     return;
                 }
@@ -56,7 +60,7 @@ export function useCurrentUser(): UseCurrentUserResult {
             isActive = false;
             abortController.abort();
         };
-    }, []);
+    }, [usersService]);
 
     return {
         currentUser,
