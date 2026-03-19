@@ -1,4 +1,4 @@
-import type { OverviewData } from './OverviewData.ts';
+import type { OverviewData } from './OverviewData';
 
 export const overviewMock: OverviewData = {
     title: 'Overview',

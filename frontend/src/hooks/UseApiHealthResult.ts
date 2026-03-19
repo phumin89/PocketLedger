@@ -1,4 +1,4 @@
-import type { ApiHealth } from '../lib/ApiHealth.ts';
+import type { ApiHealth } from '../lib/ApiHealth';
 
 export type UseApiHealthResult = {
     apiHealth: ApiHealth | null;

@@ -1,5 +1,5 @@
 import styles from './OverviewPage.module.scss';
-import type { OverviewPageProps } from './OverviewPageProps.ts';
+import type { OverviewPageProps } from './OverviewPageProps';
 
 export function OverviewPage({ data }: OverviewPageProps) {
     return (

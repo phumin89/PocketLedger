@@ -1,5 +1,5 @@
-import type { HeroContent } from '../../content/HeroContent.ts';
-import type { ApiHealth } from '../../lib/ApiHealth.ts';
+import type { HeroContent } from '../../content/HeroContent';
+import type { ApiHealth } from '../../lib/ApiHealth';
 
 export type HeroSectionProps = {
     id?: string;

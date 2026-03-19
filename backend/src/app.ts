@@ -1,7 +1,6 @@
 import cors from '@fastify/cors';
 import sensible from '@fastify/sensible';
-import type { FastifyInstance } from 'fastify';
-import Fastify from 'fastify';
+import Fastify, { type FastifyInstance } from 'fastify';
 import { ZodError } from 'zod';
 import type { IApplicationDependencies } from './composition/IApplicationDependencies.ts';
 import { createApplicationDependencies } from './composition/createApplicationDependencies.ts';

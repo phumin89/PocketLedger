@@ -4,9 +4,9 @@ import {
     transactionAccounts,
     transactionCategories,
 } from '../content/transaction-mock';
-import type { TransactionFormData } from '../content/TransactionFormData.ts';
-import type { TransactionRecord } from '../content/TransactionRecord.ts';
-import type { TransactionsStoreValue } from './TransactionsStoreValue.ts';
+import type { TransactionFormData } from '../content/TransactionFormData';
+import type { TransactionRecord } from '../content/TransactionRecord';
+import type { TransactionsStoreValue } from './TransactionsStoreValue';
 
 const TransactionsStoreContext = createContext<TransactionsStoreValue | null>(null);
 

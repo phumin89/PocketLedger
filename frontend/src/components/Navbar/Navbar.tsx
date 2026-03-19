@@ -1,6 +1,6 @@
 import { NavLink } from 'react-router-dom';
 import styles from './Navbar.module.scss';
-import type { NavbarProps } from './NavbarProps.ts';
+import type { NavbarProps } from './NavbarProps';
 
 export function Navbar({ items }: NavbarProps) {
     return (

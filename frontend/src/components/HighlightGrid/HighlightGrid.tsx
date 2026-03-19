@@ -1,5 +1,5 @@
 import styles from './HighlightGrid.module.scss';
-import type { HighlightGridProps } from './HighlightGridProps.ts';
+import type { HighlightGridProps } from './HighlightGridProps';
 
 export function HighlightGrid({ id, items }: HighlightGridProps) {
     return (

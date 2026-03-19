@@ -1,4 +1,4 @@
-import type { RoadmapItem } from '../../content/RoadmapItem.ts';
+import type { RoadmapItem } from '../../content/RoadmapItem';
 
 export type RoadmapSectionProps = {
     id?: string;

@@ -1,5 +1,5 @@
-import type { TransactionFormData } from './TransactionFormData.ts';
-import type { TransactionMeta } from './TransactionMeta.ts';
+import type { TransactionFormData } from './TransactionFormData';
+import type { TransactionMeta } from './TransactionMeta';
 
 export type TransactionEditorData = {
     pageTitle: string;

@@ -1,5 +1,5 @@
 import styles from './RoadmapSection.module.scss';
-import type { RoadmapSectionProps } from './RoadmapSectionProps.ts';
+import type { RoadmapSectionProps } from './RoadmapSectionProps';
 
 export function RoadmapSection({ id, title, items }: RoadmapSectionProps) {
     return (

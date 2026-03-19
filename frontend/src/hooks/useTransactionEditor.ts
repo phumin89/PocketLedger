@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from 'react';
-import type { TransactionFormData } from '../content/TransactionFormData.ts';
-import type { TransactionEditorState } from './TransactionEditorState.ts';
+import type { TransactionFormData } from '../content/TransactionFormData';
+import type { TransactionEditorState } from './TransactionEditorState';
 
 export function useTransactionEditor(
     initialTransaction: TransactionFormData

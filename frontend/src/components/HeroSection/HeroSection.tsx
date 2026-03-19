@@ -1,6 +1,6 @@
 import { StatusPanel } from '../StatusPanel/StatusPanel';
 import styles from './HeroSection.module.scss';
-import type { HeroSectionProps } from './HeroSectionProps.ts';
+import type { HeroSectionProps } from './HeroSectionProps';
 
 export function HeroSection({ id, hero, apiHealth, error }: HeroSectionProps) {
     return (

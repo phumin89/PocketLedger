@@ -1,5 +1,5 @@
-import type { TransactionFormData } from '../content/TransactionFormData.ts';
-import type { TransactionRecord } from '../content/TransactionRecord.ts';
+import type { TransactionFormData } from '../content/TransactionFormData';
+import type { TransactionRecord } from '../content/TransactionRecord';
 
 export type TransactionsStoreValue = {
     transactions: TransactionRecord[];

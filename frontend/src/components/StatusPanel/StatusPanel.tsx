@@ -1,5 +1,5 @@
 import styles from './StatusPanel.module.scss';
-import type { StatusPanelProps } from './StatusPanelProps.ts';
+import type { StatusPanelProps } from './StatusPanelProps';
 
 export function StatusPanel({ apiHealth, error }: StatusPanelProps) {
     const syncedAt = apiHealth ? new Date(apiHealth.timestamp).toLocaleString() : 'Pending';

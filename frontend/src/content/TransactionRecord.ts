@@ -1,4 +1,4 @@
-import type { TransactionFormData } from './TransactionFormData.ts';
+import type { TransactionFormData } from './TransactionFormData';
 
 export type TransactionRecord = TransactionFormData & {
     createdAt: string;

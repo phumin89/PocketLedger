@@ -1,4 +1,4 @@
-import type { TransactionTypeOption } from './TransactionTypeOption.ts';
+import type { TransactionTypeOption } from './TransactionTypeOption';
 
 export type TransactionFormData = {
     id: string;

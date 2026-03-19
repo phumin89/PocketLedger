@@ -1,4 +1,4 @@
-import { CurrentUserQuery, type ICurrentUserResponse } from '@pocketledger/contracts';
+import type { CurrentUserQuery, ICurrentUserResponse } from '@pocketledger/contracts';
 import type { DatabaseUserModel } from '@pocketledger/database';
 import { QueryHandler } from '../../CQRS/QueryHandler.ts';
 

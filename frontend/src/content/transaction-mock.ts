@@ -1,5 +1,5 @@
-import type { TransactionEditorData } from './TransactionEditorData.ts';
-import type { TransactionRecord } from './TransactionRecord.ts';
+import type { TransactionEditorData } from './TransactionEditorData';
+import type { TransactionRecord } from './TransactionRecord';
 
 export const transactionCategories = [
     'Salary',

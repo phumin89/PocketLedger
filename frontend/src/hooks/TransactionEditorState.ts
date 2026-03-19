@@ -1,4 +1,4 @@
-import type { TransactionFormData } from '../content/TransactionFormData.ts';
+import type { TransactionFormData } from '../content/TransactionFormData';
 
 export type TransactionEditorState = {
     draft: TransactionFormData;

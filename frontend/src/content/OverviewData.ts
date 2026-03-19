@@ -1,7 +1,7 @@
-import type { OverviewCategory } from './OverviewCategory.ts';
-import type { OverviewHighlight } from './OverviewHighlight.ts';
-import type { OverviewStat } from './OverviewStat.ts';
-import type { OverviewTrendPoint } from './OverviewTrendPoint.ts';
+import type { OverviewCategory } from './OverviewCategory';
+import type { OverviewHighlight } from './OverviewHighlight';
+import type { OverviewStat } from './OverviewStat';
+import type { OverviewTrendPoint } from './OverviewTrendPoint';
 
 export type OverviewData = {
     title: string;
