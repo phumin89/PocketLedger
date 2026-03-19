@@ -1,18 +1,4 @@
 import 'dotenv/config';
-import { buildApp } from './app.ts';
+import { ServerBootstrapper } from './ServerBootstrapper.ts';
 
-const port = Number(process.env.PORT ?? 3000);
-const host = process.env.HOST ?? '0.0.0.0';
-
-async function start(): Promise<void> {
-    const app = buildApp();
-
-    try {
-        await app.listen({ host, port });
-    } catch (error) {
-        app.log.error(error);
-        process.exit(1);
-    }
-}
-
-void start();
+void new ServerBootstrapper().start();

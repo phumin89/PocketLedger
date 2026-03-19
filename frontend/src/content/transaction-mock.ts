@@ -156,7 +156,7 @@ export function buildTransactionEditorData(transaction: TransactionRecord): Tran
     return {
         pageTitle: 'Edit transaction',
         description:
-            'Adjust a single income or expense item before wiring it to the real command endpoint.',
+            'Update the details here before this screen is connected to the real save flow.',
         transaction: {
             id: transaction.id,
             title: transaction.title,

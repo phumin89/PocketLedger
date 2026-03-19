@@ -11,7 +11,7 @@ export function buildOverviewData(
         return {
             ...baseData,
             subtitle:
-                'Live user profile synced from the PocketLedger API. Summary cards remain mock-driven for now.',
+                'Your profile is loading from the Pocket ledger API now. The summary cards are still using sample numbers for this pass.',
             profile: {
                 firstName: currentUser.firstName,
                 lastName: currentUser.lastName,
@@ -43,7 +43,7 @@ export function buildOverviewData(
         return {
             ...baseData,
             subtitle:
-                'Loading the current user profile from the API. Financial summary cards are still mock-driven.',
+                'Pulling in your profile now. The rest of the dashboard is still showing sample numbers for the moment.',
             profile: {
                 ...baseData.profile,
                 status: 'Syncing profile',
@@ -54,10 +54,11 @@ export function buildOverviewData(
     if (currentUserError) {
         return {
             ...baseData,
-            subtitle: currentUserError,
+            subtitle:
+                'We could not load your live profile right now, so you are seeing the sample profile instead.',
             profile: {
                 ...baseData.profile,
-                status: 'Fallback profile',
+                status: 'Sample profile',
             },
         };
     }

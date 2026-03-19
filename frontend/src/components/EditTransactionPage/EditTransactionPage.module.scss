@@ -15,22 +15,23 @@
 .backLink {
     display: inline-block;
     margin-bottom: 0.5rem;
-    color: #6b7280;
+    color: var(--muted);
     font-size: 0.92rem;
 }
 
 .title {
     margin: 0;
-    font-family: 'Space Grotesk', sans-serif;
+    font-family: var(--font-display);
     font-size: clamp(2rem, 3vw, 2.8rem);
-    line-height: 1;
-    color: #111827;
+    line-height: 1.02;
+    letter-spacing: -0.03em;
+    color: var(--text-strong);
 }
 
 .subtitle {
     max-width: 62ch;
     margin: 0.65rem 0 0;
-    color: #6b7280;
+    color: var(--text-soft);
 }
 
 .headerActions {
@@ -43,20 +44,20 @@
 .deleteButton {
     height: 2.9rem;
     padding: 0 1rem;
-    border-radius: 999px;
+    border-radius: var(--radius-control);
     cursor: pointer;
 }
 
 .ghostButton {
-    border: 1px solid #d7dce2;
-    background: #ffffff;
-    color: #111827;
+    border: 1px solid var(--stroke-strong);
+    background: var(--surface-strong);
+    color: var(--text-strong);
 }
 
 .primaryButton {
-    border: 0;
-    background: #111827;
-    color: #ffffff;
+    border: 1px solid var(--accent-strong);
+    background: var(--accent);
+    color: var(--on-accent);
 }
 
 .primaryButton:disabled {
@@ -67,10 +68,10 @@
 .notice {
     margin: 0;
     padding: 0.9rem 1rem;
-    border: 1px solid #e5e7eb;
-    border-radius: 18px;
-    background: #f9fafb;
-    color: #111827;
+    border: 1px solid var(--stroke);
+    border-radius: var(--radius-card);
+    background: var(--surface-soft);
+    color: var(--text-strong);
 }
 
 .grid {
@@ -81,9 +82,10 @@
 
 .formCard,
 .sideCard {
-    border: 1px solid #eef1f4;
-    border-radius: 24px;
-    background: #ffffff;
+    border: 1px solid var(--stroke);
+    border-radius: var(--radius-card);
+    background: var(--surface);
+    box-shadow: var(--shadow-card);
 }
 
 .formCard {
@@ -104,7 +106,7 @@
 
 .field span,
 .fieldFull span {
-    color: #6b7280;
+    color: var(--muted);
     font-size: 0.88rem;
 }
 
@@ -112,10 +114,10 @@
 .field select,
 .fieldFull textarea {
     width: 100%;
-    border: 1px solid #e5e7eb;
-    border-radius: 16px;
-    background: #ffffff;
-    color: #111827;
+    border: 1px solid var(--stroke);
+    border-radius: var(--radius-control);
+    background: var(--surface-strong);
+    color: var(--text-strong);
     padding: 0.9rem 1rem;
     outline: none;
 }
@@ -123,7 +125,8 @@
 .field input:focus,
 .field select:focus,
 .fieldFull textarea:focus {
-    border-color: #9ca3af;
+    border-color: var(--accent);
+    box-shadow: var(--focus-ring);
 }
 
 .fieldFull {
@@ -147,7 +150,7 @@
 
 .sideKicker {
     margin: 0;
-    color: #6b7280;
+    color: var(--warm-accent-strong);
     font-size: 0.8rem;
     letter-spacing: 0.08em;
     text-transform: uppercase;
@@ -155,7 +158,7 @@
 
 .sideTitle {
     margin: 0.5rem 0 0;
-    color: #111827;
+    color: var(--text-strong);
     font-size: 1.15rem;
     line-height: 1.3;
 }
@@ -167,37 +170,37 @@
 }
 
 .metaList dt {
-    color: #6b7280;
+    color: var(--muted);
     font-size: 0.84rem;
 }
 
 .metaList dd {
     margin: 0.3rem 0 0;
-    color: #111827;
+    color: var(--text-strong);
     font-weight: 600;
 }
 
 .summaryValue {
     margin-top: 0.7rem;
-    font-family: 'Space Grotesk', sans-serif;
+    font-family: var(--font-display);
     font-size: 2rem;
-    color: #111827;
+    color: var(--text-strong);
 }
 
 .summaryMeta {
     margin: 0.45rem 0 0;
-    color: #6b7280;
+    color: var(--muted);
 }
 
 .sideText {
     margin: 0.7rem 0 1rem;
-    color: #6b7280;
+    color: var(--text-soft);
 }
 
 .deleteButton {
-    border: 0;
-    background: #f3f4f6;
-    color: #111827;
+    border: 1px solid var(--danger-stroke);
+    background: var(--danger-soft);
+    color: var(--danger-strong);
 }
 
 @media (max-width: 1024px) {
@@ -232,11 +235,7 @@
 
     .formCard,
     .sideCard {
-        border-radius: 20px;
-    }
-
-    .formCard,
-    .sideCard {
+        border-radius: var(--radius-card);
         padding: 1rem;
     }
 }

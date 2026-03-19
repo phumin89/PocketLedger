@@ -15,7 +15,7 @@
 .kicker,
 .panelKicker {
     margin: 0 0 0.4rem;
-    color: #6b7280;
+    color: var(--warm-accent-strong);
     font-size: 0.82rem;
     font-weight: 600;
     letter-spacing: 0.08em;
@@ -24,23 +24,25 @@
 
 .title {
     margin: 0;
-    font-family: 'Space Grotesk', sans-serif;
+    font-family: var(--font-display);
     font-size: clamp(2rem, 3vw, 2.8rem);
-    line-height: 1;
-    color: #111827;
+    line-height: 1.02;
+    letter-spacing: -0.03em;
+    color: var(--text-strong);
 }
 
 .subtitle {
     max-width: 60ch;
     margin: 0.65rem 0 0;
-    color: #6b7280;
+    color: var(--text-soft);
 }
 
 .periodBadge {
     padding: 0.85rem 1rem;
-    border: 1px solid #e5e7eb;
-    border-radius: 999px;
-    color: #111827;
+    border: 1px solid var(--stroke);
+    border-radius: var(--radius-control);
+    background: var(--surface-soft);
+    color: var(--text-strong);
     white-space: nowrap;
 }
 
@@ -53,9 +55,10 @@
 .statCard,
 .panel,
 .panelWide {
-    border: 1px solid #eef1f4;
-    border-radius: 24px;
-    background: #ffffff;
+    border: 1px solid var(--stroke);
+    border-radius: var(--radius-card);
+    background: var(--surface);
+    box-shadow: var(--shadow-card);
 }
 
 .statCard {
@@ -64,16 +67,16 @@
 
 .statLabel {
     margin: 0;
-    color: #6b7280;
+    color: var(--muted);
     font-size: 0.88rem;
 }
 
 .statValue {
     margin: 0.65rem 0 0;
-    font-family: 'Space Grotesk', sans-serif;
+    font-family: var(--font-display);
     font-size: 1.65rem;
     line-height: 1.08;
-    color: #111827;
+    color: var(--text-strong);
 }
 
 .mainGrid {
@@ -111,7 +114,7 @@
     justify-content: space-between;
     gap: 1rem;
     padding: 0.9rem 0;
-    border-top: 1px solid #f3f4f6;
+    border-top: 1px solid var(--stroke);
 }
 
 .transactionRow:first-child {
@@ -121,17 +124,17 @@
 
 .transactionTitle {
     margin: 0;
-    color: #111827;
+    color: var(--text-strong);
     font-size: 1rem;
 }
 
 .transactionMeta {
     margin: 0.35rem 0 0;
-    color: #6b7280;
+    color: var(--muted);
 }
 
 .transactionAmount {
-    color: #111827;
+    color: var(--text-strong);
     white-space: nowrap;
 }
 
@@ -145,20 +148,20 @@
     align-items: center;
     justify-content: space-between;
     gap: 1rem;
-    color: #111827;
+    color: var(--text-strong);
 }
 
 .categoryTrack {
     overflow: hidden;
     height: 0.7rem;
     border-radius: 999px;
-    background: #f3f4f6;
+    background: var(--track);
 }
 
 .categoryFill {
     height: 100%;
     border-radius: inherit;
-    background: #111827;
+    background: var(--growth);
 }
 
 .trendGrid {
@@ -169,13 +172,14 @@
 
 .trendCard {
     padding: 1rem;
-    border-radius: 18px;
-    background: #fafafa;
+    border: 1px solid var(--stroke);
+    border-radius: var(--radius-card);
+    background: var(--surface-soft);
 }
 
 .trendLabel {
     margin: 0;
-    color: #111827;
+    color: var(--text-strong);
     font-weight: 600;
 }
 
@@ -192,11 +196,11 @@
 }
 
 .trendIncome {
-    background: #111827;
+    background: var(--growth-strong);
 }
 
 .trendExpense {
-    background: #d1d5db;
+    background: var(--expense);
 }
 
 .trendMeta {
@@ -204,7 +208,7 @@
     justify-content: space-between;
     gap: 0.75rem;
     margin-top: 0.9rem;
-    color: #6b7280;
+    color: var(--muted);
     font-size: 0.88rem;
 }
 
@@ -245,7 +249,7 @@
     .statCard,
     .panel,
     .panelWide {
-        border-radius: 20px;
+        border-radius: var(--radius-card);
         padding: 1rem;
     }
 }

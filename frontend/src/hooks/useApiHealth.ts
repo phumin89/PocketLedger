@@ -34,7 +34,7 @@ export function useApiHealth(dependencies: IUseApiHealthDependencies = {}): UseA
                 setError(
                     loadError instanceof Error
                         ? loadError.message
-                        : 'PocketLedger API is not reachable.'
+                        : 'Pocket ledger API is not reachable.'
                 );
             }
         }

@@ -7,10 +7,15 @@ export function Navbar({ items }: NavbarProps) {
         <header className={styles.navbar}>
             <div className={styles.inner}>
                 <NavLink className={styles.brand} to="/">
-                    <span className={styles.brandMark}>PL</span>
+                    <img
+                        alt=""
+                        aria-hidden="true"
+                        className={styles.brandMark}
+                        src="/brand-mark.svg"
+                    />
                     <span className={styles.brandText}>
-                        <strong>PocketLedger</strong>
-                        <small>Finance dashboard</small>
+                        <strong>Pocket ledger</strong>
+                        <small>Personal money tracker</small>
                     </span>
                 </NavLink>
 

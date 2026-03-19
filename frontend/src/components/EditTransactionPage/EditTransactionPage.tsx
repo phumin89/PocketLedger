@@ -47,9 +47,9 @@ export function EditTransactionPage() {
                         <Link className={styles.backLink} to="/transactions">
                             Back to transactions
                         </Link>
-                        <h1 className={styles.title}>Transaction not found</h1>
+                        <h1 className={styles.title}>We couldn&apos;t find that transaction</h1>
                         <p className={styles.subtitle}>
-                            The selected record does not exist in the current mock store.
+                            That record is not in the current sample dataset.
                         </p>
                     </div>
                 </header>
@@ -227,9 +227,9 @@ export function EditTransactionPage() {
                     </article>
 
                     <article className={styles.sideCard}>
-                        <p className={styles.sideKicker}>Danger zone</p>
+                        <p className={styles.sideKicker}>Delete this entry</p>
                         <p className={styles.sideText}>
-                            Keep delete separate from save so the real command flow stays explicit.
+                            Deleting removes this entry from the current sample dataset right away.
                         </p>
                         <button
                             className={styles.deleteButton}

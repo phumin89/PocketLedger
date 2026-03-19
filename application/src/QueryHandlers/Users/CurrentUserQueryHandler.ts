@@ -6,10 +6,10 @@ export class CurrentUserQueryHandler extends QueryHandler<
     CurrentUserQuery,
     ICurrentUserResponse | null
 > {
-    public override async execute(_query: CurrentUserQuery): Promise<ICurrentUserResponse | null> {
-        const user = await this.dbContext.user.findFirst({
-            orderBy: {
-                createdAt: 'asc',
+    public override async execute(query: CurrentUserQuery): Promise<ICurrentUserResponse | null> {
+        const user = await this.dbContext.user.findUnique({
+            where: {
+                id: query.userId,
             },
         });
 

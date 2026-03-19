@@ -1,3 +1,6 @@
+export * from './CQRS/Commands/Auth/Login/ILoginRequest.ts';
+export * from './CQRS/Commands/Auth/Login/ILoginResponse.ts';
+export * from './CQRS/Commands/Auth/Login/LoginCommand.ts';
 export * from './CQRS/Contracts/CommandRequest.ts';
 export * from './CQRS/Contracts/CommandResponse.ts';
 export * from './CQRS/Contracts/ICommandRequest.ts';
