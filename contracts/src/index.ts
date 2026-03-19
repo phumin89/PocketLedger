@@ -6,3 +6,5 @@ export * from './CQRS/Queries/Users/CurrentUser/CurrentUserQuery.js';
 export * from './CQRS/Queries/Users/CurrentUser/CurrentUserResponse.js';
 export * from './CQRS/Requests/Command.js';
 export * from './CQRS/Requests/Query.js';
+export * from './CQRS/Types/RequestConstructor.js';
+export * from './CQRS/Types/RequestResult.js';

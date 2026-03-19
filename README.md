@@ -37,7 +37,7 @@ The goal is simple: keep the first version easy to navigate while leaving a clea
 flowchart LR
     A["React + Vite SPA"] -->|REST /api| B["Fastify API"]
     B --> C["Controllers + Routes"]
-    C --> D["CQRS Bus"]
+    C --> D["Request Dispatcher"]
     D --> E["Application Handlers"]
     E --> F["Prisma Client"]
     F --> G["PostgreSQL"]
@@ -45,26 +45,26 @@ flowchart LR
 
 ## Workspace Map
 
-| Workspace | Responsibility | Notes |
-| --- | --- | --- |
-| `frontend` | React SPA | Dashboard, transactions browser, and editor UI |
-| `backend` | Fastify API | Routes, controllers, app bootstrap, and CQRS dispatch |
-| `application` | CQRS handlers | Query and command handler implementations |
-| `contracts` | Shared contracts | Request and response types shared across layers |
-| `database` | Prisma + DB client | Prisma schema, migrations, generated client, and DB exports |
-| `docker` | Container setup | Dockerfiles used by the local dev stack |
+| Workspace     | Responsibility     | Notes                                                       |
+| ------------- | ------------------ | ----------------------------------------------------------- |
+| `frontend`    | React SPA          | Dashboard, transactions browser, and editor UI              |
+| `backend`     | Fastify API        | Routes, controllers, app bootstrap, and CQRS dispatch       |
+| `application` | CQRS handlers      | Query and command handler implementations                   |
+| `contracts`   | Shared contracts   | Request and response types shared across layers             |
+| `database`    | Prisma + DB client | Prisma schema, migrations, generated client, and DB exports |
+| `docker`      | Container setup    | Dockerfiles used by the local dev stack                     |
 
 ## Current Scope
 
 - Implemented backend endpoints:
-  - `GET /api/health`
-  - `GET /api/users/me`
-  - `GET /api/queries/users/me`
+    - `GET /api/health`
+    - `GET /api/users/me`
+    - `GET /api/queries/users/me`
 - Implemented database model:
-  - `User`
+    - `User`
 - Frontend status:
-  - Overview and transaction flows are currently mock-driven UI
-  - Health-check plumbing exists for backend connectivity
+    - Overview and transaction flows are currently mock-driven UI
+    - Health-check plumbing exists for backend connectivity
 
 ## Project Structure
 
@@ -82,34 +82,34 @@ PocketLedger/
 
 1. Install dependencies.
 
-   ```bash
-   npm install
-   ```
+    ```bash
+    npm install
+    ```
 
 2. Copy the backend environment file.
 
-   ```bash
-   copy backend\.env.example backend\.env
-   ```
+    ```bash
+    copy backend\.env.example backend\.env
+    ```
 
 3. Start PostgreSQL.
 
-   ```bash
-   docker compose up -d
-   ```
+    ```bash
+    docker compose up -d
+    ```
 
 4. Generate the Prisma client and apply migrations.
 
-   ```bash
-   npm run db:generate
-   npm run db:migrate
-   ```
+    ```bash
+    npm run db:generate
+    npm run db:migrate
+    ```
 
 5. Start frontend and backend.
 
-   ```bash
-   npm run dev
-   ```
+    ```bash
+    npm run dev
+    ```
 
 Local ports:
 

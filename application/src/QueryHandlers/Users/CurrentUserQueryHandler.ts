@@ -1,16 +1,12 @@
 import { CurrentUserQuery, CurrentUserResponse } from '@pocketledger/contracts';
-import { DatabaseUserModel, IDbContext } from '@pocketledger/database';
+import { DatabaseUserModel } from '@pocketledger/database';
 import { QueryHandler } from '../../CQRS/QueryHandler.js';
 
 export class CurrentUserQueryHandler extends QueryHandler<
     CurrentUserQuery,
     CurrentUserResponse | null
 > {
-    static readonly requestName = 'CurrentUserQuery';
-
-    constructor(context: IDbContext) {
-        super(context);
-    }
+    static readonly handles = CurrentUserQuery;
 
     async execute(_query: CurrentUserQuery): Promise<CurrentUserResponse | null> {
         const user = await this.dbContext.user.findFirst({

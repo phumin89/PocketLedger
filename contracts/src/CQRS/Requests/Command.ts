@@ -1,5 +1,5 @@
-import type { ICommandRequest } from '../Contracts/ICommandRequest.js';
+import type { CommandRequest } from '../Contracts/ICommandRequest.js';
 
-export abstract class Command<TResult = unknown> implements ICommandRequest<TResult> {
+export abstract class Command<TResult = unknown> implements CommandRequest<TResult> {
     declare readonly __resultType: TResult;
 }

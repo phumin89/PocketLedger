@@ -1,6 +1,6 @@
-import type { IQueryResponse } from '../../../Contracts/IQueryResponse.js';
+import type { QueryResponse } from '../../../Contracts/IQueryResponse.js';
 
-export interface CurrentUserResponse extends IQueryResponse {
+export interface CurrentUserResponse extends QueryResponse {
     id: string;
     email: string;
     firstName: string;

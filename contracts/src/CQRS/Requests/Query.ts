@@ -1,5 +1,5 @@
-import type { IQueryRequest } from '../Contracts/IQueryRequest.js';
+import type { QueryRequest } from '../Contracts/IQueryRequest.js';
 
-export abstract class Query<TResult = unknown> implements IQueryRequest<TResult> {
+export abstract class Query<TResult = unknown> implements QueryRequest<TResult> {
     declare readonly __resultType: TResult;
 }

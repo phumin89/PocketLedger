@@ -1,1 +1,3 @@
-export interface ICommandResponse {}
+export interface CommandResponse {}
+
+export interface ICommandResponse extends CommandResponse {}
