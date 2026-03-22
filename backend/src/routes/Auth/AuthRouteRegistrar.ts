@@ -1,5 +1,6 @@
 import type { FastifyPluginAsync } from 'fastify';
 import type { AuthController } from '../../Controllers/Auth/AuthController.ts';
+import { LoginRequestBodySchema } from '../../Controllers/Auth/Schemas/LoginRequestBodySchema.ts';
 import { EndpointRouteRegistrarBase } from '../EndpointRouteRegistrarBase.ts';
 import type { IAuthRouteDependencies } from './Contracts/IAuthRouteDependencies.ts';
 
@@ -12,10 +13,11 @@ export class AuthRouteRegistrar extends EndpointRouteRegistrarBase {
     }
 
     public readonly register: FastifyPluginAsync = async (app) => {
-        this.registerControllerPost(
+        this.registerValidatedControllerPost(
             app,
             this.authController,
             this.authController.login.name,
+            LoginRequestBodySchema,
             async (request, reply) => {
                 return this.authController.login(request, reply);
             }

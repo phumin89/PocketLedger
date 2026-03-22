@@ -1,41 +1,43 @@
-.page {
-    width: 100%;
-    padding: 1.5rem 0 0;
+.panelStack {
     display: grid;
     gap: 1.25rem;
 }
 
-.header {
-    display: flex;
-    align-items: flex-start;
-    justify-content: space-between;
-    gap: 1rem;
+.section {
+    display: grid;
+    gap: 0.65rem;
 }
 
-.backLink {
-    display: inline-block;
-    margin-bottom: 0.5rem;
+.sectionHeader {
+    display: grid;
+    gap: 0.2rem;
+}
+
+.sectionKicker {
+    margin: 0;
     color: var(--muted);
+    font-size: 0.76rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+}
+
+.sectionHint {
+    margin: 0;
+    color: var(--text-soft);
     font-size: 0.92rem;
 }
 
-.title {
-    margin: 0;
-    font-family: var(--font-display);
-    font-size: clamp(2rem, 3vw, 2.8rem);
-    line-height: 1.02;
-    letter-spacing: -0.03em;
-    color: var(--text-strong);
-}
-
-.subtitle {
-    max-width: 62ch;
-    margin: 0.65rem 0 0;
-    color: var(--text-soft);
-}
-
-.headerActions {
+.panelActions {
     display: flex;
+    justify-content: space-between;
+    gap: 0.75rem;
+    width: 100%;
+}
+
+.panelActionsEnd {
+    display: flex;
+    justify-content: flex-end;
     gap: 0.75rem;
 }
 
@@ -43,30 +45,42 @@
 .primaryButton,
 .deleteButton {
     height: 2.9rem;
-    padding: 0 1rem;
+    padding: 0 1.1rem;
     border-radius: var(--radius-control);
     cursor: pointer;
+    transition:
+        background-color 160ms ease,
+        border-color 160ms ease,
+        color 160ms ease,
+        transform 160ms ease;
 }
 
 .ghostButton {
-    border: 1px solid var(--stroke-strong);
-    background: var(--surface-strong);
+    border: 1px solid color-mix(in srgb, var(--stroke) 88%, transparent);
+    background: color-mix(in srgb, var(--surface-soft) 94%, white);
     color: var(--text-strong);
 }
 
 .primaryButton {
-    border: 1px solid var(--accent-strong);
+    border: 1px solid color-mix(in srgb, var(--accent-strong) 88%, transparent);
     background: var(--accent);
     color: var(--on-accent);
 }
 
+.ghostButton:hover,
+.primaryButton:hover,
+.deleteButton:hover {
+    transform: translateY(-1px);
+}
+
+.ghostButton:disabled,
 .primaryButton:disabled {
     opacity: 0.45;
     cursor: not-allowed;
 }
 
 .notice {
-    margin: 0;
+    margin: 0 0 1rem;
     padding: 0.9rem 1rem;
     border: 1px solid var(--stroke);
     border-radius: var(--radius-card);
@@ -74,28 +88,25 @@
     color: var(--text-strong);
 }
 
-.grid {
-    display: grid;
-    grid-template-columns: minmax(0, 1.4fr) minmax(280px, 0.7fr);
-    gap: 1rem;
+.formCard,
+.metaCard,
+.dangerCard,
+.stateCard {
+    border: 1px solid color-mix(in srgb, var(--stroke) 86%, transparent);
+    border-radius: var(--radius-card);
+    background: color-mix(in srgb, var(--surface) 98%, white);
+    box-shadow: none;
 }
 
 .formCard,
-.sideCard {
-    border: 1px solid var(--stroke);
-    border-radius: var(--radius-card);
-    background: var(--surface);
-    box-shadow: var(--shadow-card);
-}
-
-.formCard {
-    padding: 1.5rem;
+.stateCard {
+    padding: 1.1rem;
 }
 
 .formGrid {
     display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 1rem;
+    grid-template-columns: 1fr;
+    gap: 0.95rem;
 }
 
 .field,
@@ -106,67 +117,88 @@
 
 .field span,
 .fieldFull span {
-    color: var(--muted);
-    font-size: 0.88rem;
+    color: var(--text-soft);
+    font-size: 0.82rem;
+    font-weight: 500;
 }
 
 .field input,
 .field select,
 .fieldFull textarea {
     width: 100%;
-    border: 1px solid var(--stroke);
+    border: 1px solid color-mix(in srgb, var(--stroke) 76%, transparent);
     border-radius: var(--radius-control);
-    background: var(--surface-strong);
+    background: color-mix(in srgb, var(--surface-soft) 65%, white);
     color: var(--text-strong);
-    padding: 0.9rem 1rem;
+    padding: 0.82rem 0.95rem;
     outline: none;
+    transition:
+        border-color 160ms ease,
+        box-shadow 160ms ease,
+        background-color 160ms ease;
 }
 
 .field input:focus,
 .field select:focus,
 .fieldFull textarea:focus {
     border-color: var(--accent);
-    box-shadow: var(--focus-ring);
+    background: white;
+    box-shadow: 0 0 0 4px color-mix(in srgb, var(--accent) 12%, transparent);
 }
 
-.fieldFull {
-    grid-column: 1 / -1;
+.field input[aria-invalid='true'],
+.field select[aria-invalid='true'],
+.fieldFull textarea[aria-invalid='true'] {
+    border-color: color-mix(in srgb, var(--danger-strong) 36%, transparent);
+    background: color-mix(in srgb, var(--danger-soft) 34%, white);
+}
+
+.field input,
+.field select {
+    min-height: 3.15rem;
 }
 
 .fieldFull textarea {
     resize: vertical;
-    min-height: 8rem;
+    min-height: 6.5rem;
 }
 
-.sideColumn {
-    display: grid;
-    gap: 1rem;
-    align-content: start;
+.fieldError,
+.fieldHint {
+    display: block;
+    margin-top: -0.1rem;
+    font-size: 0.79rem;
 }
 
-.sideCard {
-    padding: 1.25rem;
+.fieldError {
+    color: var(--danger-strong);
 }
 
-.sideKicker {
-    margin: 0;
-    color: var(--warm-accent-strong);
-    font-size: 0.8rem;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
+.fieldHint {
+    color: var(--muted);
+}
+
+.metaCard,
+.dangerCard {
+    padding: 1rem;
 }
 
 .sideTitle {
-    margin: 0.5rem 0 0;
+    margin: 0;
     color: var(--text-strong);
-    font-size: 1.15rem;
-    line-height: 1.3;
+    font-family:
+        'JetBrains Mono', 'SFMono-Regular', 'Cascadia Code', 'Consolas', 'Liberation Mono',
+        monospace;
+    font-size: 0.94rem;
+    font-weight: 500;
+    line-height: 1.45;
+    overflow-wrap: anywhere;
 }
 
 .metaList {
     display: grid;
-    gap: 0.9rem;
-    margin: 1rem 0 0;
+    gap: 0.85rem;
+    margin: 0.9rem 0 0;
 }
 
 .metaList dt {
@@ -180,62 +212,45 @@
     font-weight: 600;
 }
 
-.summaryValue {
-    margin-top: 0.7rem;
-    font-family: var(--font-display);
-    font-size: 2rem;
-    color: var(--text-strong);
-}
-
-.summaryMeta {
-    margin: 0.45rem 0 0;
-    color: var(--muted);
-}
-
 .sideText {
-    margin: 0.7rem 0 1rem;
+    margin: 0 0 1rem;
     color: var(--text-soft);
 }
 
 .deleteButton {
-    border: 1px solid var(--danger-stroke);
-    background: var(--danger-soft);
+    width: 100%;
+    border: 1px solid color-mix(in srgb, var(--danger-stroke) 88%, transparent);
+    background: color-mix(in srgb, var(--danger-soft) 92%, white);
     color: var(--danger-strong);
 }
 
-@media (max-width: 1024px) {
-    .grid {
-        grid-template-columns: 1fr;
-    }
+.deleteButton:disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+}
+
+.stateTitle {
+    margin: 0;
+    font-size: 1.05rem;
+    color: var(--text-strong);
+}
+
+.stateText {
+    margin: 0.55rem 0 0;
+    color: var(--text-soft);
 }
 
 @media (max-width: 720px) {
-    .header {
+    .panelActions {
         flex-direction: column;
     }
 
-    .headerActions {
+    .panelActionsEnd {
         width: 100%;
     }
 
     .ghostButton,
     .primaryButton {
-        flex: 1;
-    }
-
-    .formGrid {
-        grid-template-columns: 1fr;
-    }
-}
-
-@media (max-width: 640px) {
-    .page {
-        padding-top: 0.75rem;
-    }
-
-    .formCard,
-    .sideCard {
-        border-radius: var(--radius-card);
-        padding: 1rem;
+        width: 100%;
     }
 }

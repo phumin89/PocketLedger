@@ -1,14 +1,11 @@
-import type { TransactionTypeOption } from './TransactionTypeOption';
+import type { TransactionCategory, TransactionType } from '@pocketledger/contracts';
 
 export type TransactionFormData = {
     id: string;
     title: string;
     amount: string;
-    type: TransactionTypeOption;
-    category: string;
+    type: TransactionType;
+    category: TransactionCategory;
     occurredAt: string;
-    account: string;
-    reference: string;
     note: string;
-    status: string;
 };

@@ -1,3 +1,4 @@
+import type { ICurrentUserContext } from '@pocketledger/application';
 import type { FastifyReply, FastifyRequest } from 'fastify';
 import type { IAuthCookieService } from '../../Services/Auth/Contracts/IAuthCookieService.ts';
 import type { IAuthSessionService } from '../../Services/Auth/Contracts/IAuthSessionService.ts';
@@ -6,13 +7,16 @@ import type { IRequireAuthenticatedUserPreHandlerDependencies } from './Contract
 export class RequireAuthenticatedUserPreHandler {
     private readonly authCookieService: IAuthCookieService;
     private readonly authSessionService: IAuthSessionService;
+    private readonly currentUserContext: ICurrentUserContext;
 
     public constructor({
         authCookieService,
         authSessionService,
+        currentUserContext,
     }: IRequireAuthenticatedUserPreHandlerDependencies) {
         this.authCookieService = authCookieService;
         this.authSessionService = authSessionService;
+        this.currentUserContext = currentUserContext;
     }
 
     public readonly handle = async (
@@ -36,5 +40,6 @@ export class RequireAuthenticatedUserPreHandler {
         }
 
         request.authenticatedUserId = userId;
+        this.currentUserContext.setCurrentUserId(userId);
     };
 }

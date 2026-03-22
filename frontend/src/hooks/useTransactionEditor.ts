@@ -13,7 +13,7 @@ export function useTransactionEditor(
         setBaseline(initialTransaction);
         setDraft(initialTransaction);
         setNotice(null);
-    }, [initialTransaction.id]);
+    }, [initialTransaction]);
 
     const isDirty = useMemo(
         () => JSON.stringify(draft) !== JSON.stringify(baseline),
@@ -36,13 +36,13 @@ export function useTransactionEditor(
         setNotice('Changes discarded.');
     }
 
-    function save() {
+    function save(message: string = 'Changes saved.') {
         setBaseline(draft);
-        setNotice('Mock transaction saved.');
+        setNotice(message);
     }
 
     function remove() {
-        setNotice('Mock delete queued. Connect this to the delete command later.');
+        setNotice('Transaction removed.');
     }
 
     return {

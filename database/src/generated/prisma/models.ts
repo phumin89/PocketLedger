@@ -10,5 +10,6 @@
  */
 export type * from './models/AuthIdentity.ts'
 export type * from './models/AuthSession.ts'
+export type * from './models/Transaction.ts'
 export type * from './models/User.ts'
 export type * from './commonInputTypes.ts'

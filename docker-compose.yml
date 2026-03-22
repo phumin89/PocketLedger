@@ -41,7 +41,11 @@ services:
             postgres:
                 condition: service_healthy
         healthcheck:
-            test: ['CMD-SHELL', 'wget -qO- http://127.0.0.1:3000/api/health > /dev/null || exit 1']
+            test:
+                [
+                    'CMD-SHELL',
+                    'wget -qO- http://127.0.0.1:3000/api/health/status > /dev/null || exit 1',
+                ]
             interval: 5s
             timeout: 5s
             retries: 10
@@ -54,18 +58,10 @@ services:
                 - action: sync
                   path: ./backend/tsconfig.json
                   target: /app/backend/tsconfig.json
-                - action: sync
-                  path: ./application/src
-                  target: /app/application/src
-                - action: sync
-                  path: ./application/tsconfig.json
-                  target: /app/application/tsconfig.json
-                - action: sync
-                  path: ./contracts/src
-                  target: /app/contracts/src
-                - action: sync
-                  path: ./contracts/tsconfig.json
-                  target: /app/contracts/tsconfig.json
+                - action: rebuild
+                  path: ./application
+                - action: rebuild
+                  path: ./contracts
                 - action: rebuild
                   path: ./backend/package.json
                 - action: rebuild
@@ -136,8 +132,14 @@ services:
                   path: ./frontend/src
                   target: /app/frontend/src
                 - action: sync
+                  path: ./contracts/src
+                  target: /app/contracts/src
+                - action: sync
                   path: ./frontend/index.html
                   target: /app/frontend/index.html
+                - action: sync+restart
+                  path: ./contracts/tsconfig.json
+                  target: /app/contracts/tsconfig.json
                 - action: sync+restart
                   path: ./frontend/vite.config.ts
                   target: /app/frontend/vite.config.ts
@@ -152,6 +154,8 @@ services:
                   target: /app/frontend/tsconfig.node.json
                 - action: rebuild
                   path: ./frontend/package.json
+                - action: rebuild
+                  path: ./contracts/package.json
                 - action: rebuild
                   path: ./package.json
                 - action: rebuild

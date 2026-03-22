@@ -52,6 +52,11 @@ export type AuthIdentity = Prisma.AuthIdentityModel
  */
 export type AuthSession = Prisma.AuthSessionModel
 /**
+ * Model Transaction
+ * 
+ */
+export type Transaction = Prisma.TransactionModel
+/**
  * Model User
  * 
  */
