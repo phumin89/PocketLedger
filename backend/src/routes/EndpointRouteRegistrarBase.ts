@@ -1,4 +1,11 @@
-import type { FastifyInstance, HTTPMethods, RouteHandlerMethod } from 'fastify';
+import type {
+    FastifyInstance,
+    FastifyReply,
+    FastifyRequest,
+    HTTPMethods,
+    RouteHandlerMethod,
+} from 'fastify';
+import { z } from 'zod';
 import { ControllerBase } from '../Controllers/ControllerBase.ts';
 
 export abstract class EndpointRouteRegistrarBase {
@@ -18,6 +25,28 @@ export abstract class EndpointRouteRegistrarBase {
         );
     }
 
+    protected registerValidatedControllerGet<TQuerystring>(
+        app: FastifyInstance,
+        controller: ControllerBase,
+        actionName: string,
+        querySchema: z.ZodType<TQuerystring, z.ZodTypeDef, unknown>,
+        handler: (
+            request: FastifyRequest<{ Querystring: TQuerystring }>,
+            reply: FastifyReply
+        ) => ReturnType<RouteHandlerMethod>
+    ): void {
+        this.registerRoute(
+            app,
+            'GET',
+            controller.constructor.name.replace(/Controller$/, ''),
+            controller.constructor.name,
+            actionName,
+            handler as RouteHandlerMethod,
+            undefined,
+            querySchema
+        );
+    }
+
     protected registerControllerPost(
         app: FastifyInstance,
         controller: ControllerBase,
@@ -31,6 +60,69 @@ export abstract class EndpointRouteRegistrarBase {
             controller.constructor.name,
             actionName,
             handler
+        );
+    }
+
+    protected registerValidatedControllerPost<TBody>(
+        app: FastifyInstance,
+        controller: ControllerBase,
+        actionName: string,
+        bodySchema: z.ZodType<TBody, z.ZodTypeDef, unknown>,
+        handler: (
+            request: FastifyRequest<{ Body: TBody }>,
+            reply: FastifyReply
+        ) => ReturnType<RouteHandlerMethod>
+    ): void {
+        this.registerRoute(
+            app,
+            'POST',
+            controller.constructor.name.replace(/Controller$/, ''),
+            controller.constructor.name,
+            actionName,
+            handler as RouteHandlerMethod,
+            bodySchema
+        );
+    }
+
+    protected registerValidatedControllerPut<TBody>(
+        app: FastifyInstance,
+        controller: ControllerBase,
+        actionName: string,
+        bodySchema: z.ZodType<TBody, z.ZodTypeDef, unknown>,
+        handler: (
+            request: FastifyRequest<{ Body: TBody }>,
+            reply: FastifyReply
+        ) => ReturnType<RouteHandlerMethod>
+    ): void {
+        this.registerRoute(
+            app,
+            'PUT',
+            controller.constructor.name.replace(/Controller$/, ''),
+            controller.constructor.name,
+            actionName,
+            handler as RouteHandlerMethod,
+            bodySchema
+        );
+    }
+
+    protected registerValidatedControllerDelete<TBody>(
+        app: FastifyInstance,
+        controller: ControllerBase,
+        actionName: string,
+        bodySchema: z.ZodType<TBody, z.ZodTypeDef, unknown>,
+        handler: (
+            request: FastifyRequest<{ Body: TBody }>,
+            reply: FastifyReply
+        ) => ReturnType<RouteHandlerMethod>
+    ): void {
+        this.registerRoute(
+            app,
+            'DELETE',
+            controller.constructor.name.replace(/Controller$/, ''),
+            controller.constructor.name,
+            actionName,
+            handler as RouteHandlerMethod,
+            bodySchema
         );
     }
 
@@ -49,7 +141,9 @@ export abstract class EndpointRouteRegistrarBase {
         routeGroupName: string,
         endpointOwnerName: string,
         actionName: string,
-        handler: RouteHandlerMethod
+        handler: RouteHandlerMethod,
+        bodySchema?: z.ZodTypeAny,
+        querySchema?: z.ZodTypeAny
     ): void {
         app.route({
             method,
@@ -57,6 +151,18 @@ export abstract class EndpointRouteRegistrarBase {
             config: {
                 endpointName: this.resolveEndpointName(endpointOwnerName, actionName),
             },
+            preValidation:
+                bodySchema || querySchema
+                    ? async (request) => {
+                          if (querySchema) {
+                              request.query = querySchema.parse(request.query);
+                          }
+
+                          if (bodySchema) {
+                              request.body = bodySchema.parse(request.body);
+                          }
+                      }
+                    : undefined,
             handler,
         });
     }

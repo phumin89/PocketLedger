@@ -9,6 +9,6 @@ export type TransactionEditorState = {
         value: TransactionFormData[TKey]
     ) => void;
     reset: () => void;
-    save: () => void;
+    save: (message?: string) => void;
     remove: () => void;
 };

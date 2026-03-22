@@ -6,6 +6,5 @@ export type TransactionEditorData = {
     description: string;
     transaction: TransactionFormData;
     categories: string[];
-    accounts: string[];
     meta: TransactionMeta;
 };

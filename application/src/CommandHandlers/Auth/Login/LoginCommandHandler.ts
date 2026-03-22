@@ -8,8 +8,12 @@ import type { ILoginCommandHandlerDependencies } from './Contracts/ILoginCommand
 export class LoginCommandHandler extends CommandHandler<LoginCommand, ILoginResponse | null> {
     private readonly passwordHashingService: IPasswordHashingService;
 
-    public constructor({ dbContext, passwordHashingService }: ILoginCommandHandlerDependencies) {
-        super({ dbContext });
+    public constructor({
+        currentUserContext,
+        dbContext,
+        passwordHashingService,
+    }: ILoginCommandHandlerDependencies) {
+        super({ currentUserContext, dbContext });
         this.passwordHashingService = passwordHashingService;
     }
 

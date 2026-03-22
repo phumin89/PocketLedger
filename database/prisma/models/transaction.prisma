@@ -1,0 +1,42 @@
+enum TransactionType {
+    INCOME
+    EXPENSE
+}
+
+enum TransactionCategory {
+    SALARY
+    OVERTIME
+    FREELANCE
+    COMMISSION
+    BONUS
+    INVESTMENT
+    BUSINESS
+    GIFT
+    FOOD
+    TRANSPORT
+    BILLS
+    SHOPPING
+    HEALTH
+    SAVINGS
+    SPORT
+    ENTERTAINMENT
+    CREDIT_CARD
+    HOUSING
+    OTHER
+}
+
+model Transaction {
+    id         String              @id @default(cuid())
+    userId     String
+    user       User                @relation(fields: [userId], references: [id], onDelete: Cascade)
+    title      String
+    amount     Decimal             @db.Decimal(18, 2)
+    type       TransactionType
+    category   TransactionCategory
+    occurredAt DateTime
+    note       String              @default("") @db.VarChar(500)
+    createdAt  DateTime            @default(now())
+    updatedAt  DateTime            @updatedAt
+
+    @@index([userId, occurredAt(sort: Desc)])
+}

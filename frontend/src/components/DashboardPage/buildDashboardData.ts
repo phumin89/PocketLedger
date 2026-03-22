@@ -1,3 +1,4 @@
+import { TransactionCategory } from '@pocketledger/contracts';
 import type { TransactionRecord } from '../../content/TransactionRecord';
 import type {
     DashboardCategoryItem,
@@ -98,7 +99,7 @@ export function buildDashboardData(
     const yearExpense = sumAmounts(yearTransactions, 'EXPENSE');
     const yearNet = yearIncome - yearExpense;
     const savingsBucket = yearTransactions
-        .filter((transaction) => transaction.category === 'Savings')
+        .filter((transaction) => transaction.category === TransactionCategory.SAVINGS)
         .reduce((total, transaction) => total + transaction.amountValue, 0);
     const activeCategoryCount = new Set(
         monthTransactions.map((transaction) => transaction.category)

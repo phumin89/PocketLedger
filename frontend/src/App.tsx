@@ -22,12 +22,6 @@ const TransactionsPage = lazy(async () => {
     return { default: module.TransactionsPage };
 });
 
-const EditTransactionPage = lazy(async () => {
-    const module = await import('./components/EditTransactionPage/EditTransactionPage');
-
-    return { default: module.EditTransactionPage };
-});
-
 export default function App() {
     const {
         currentUser,
@@ -88,11 +82,7 @@ export default function App() {
                                     path="/dashboard"
                                     element={<DashboardPage firstName={currentUser?.firstName} />}
                                 />
-                                <Route path="/transactions" element={<TransactionsPage />} />
-                                <Route
-                                    path="/transactions/:transactionId/edit"
-                                    element={<EditTransactionPage />}
-                                />
+                                <Route path="/transactions/*" element={<TransactionsPage />} />
                                 <Route
                                     path="/reports"
                                     element={

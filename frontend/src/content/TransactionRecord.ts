@@ -1,7 +1,3 @@
-import type { TransactionFormData } from './TransactionFormData';
+import type { ITransaction } from '@pocketledger/contracts';
 
-export type TransactionRecord = TransactionFormData & {
-    createdAt: string;
-    updatedAt: string;
-    source: string;
-};
+export type TransactionRecord = ITransaction;
