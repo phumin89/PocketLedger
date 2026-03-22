@@ -84,7 +84,10 @@ export default function App() {
                                 <Route path="/" element={<OverviewPage data={overviewData} />} />
                                 <Route path="/login" element={<Navigate replace to="/" />} />
                                 <Route path="/overview" element={<Navigate replace to="/" />} />
-                                <Route path="/dashboard" element={<DashboardPage />} />
+                                <Route
+                                    path="/dashboard"
+                                    element={<DashboardPage firstName={currentUser?.firstName} />}
+                                />
                                 <Route path="/transactions" element={<TransactionsPage />} />
                                 <Route
                                     path="/transactions/:transactionId/edit"

@@ -13,7 +13,7 @@
 }
 
 .kicker,
-.panelKicker {
+.sectionLabel {
     margin: 0 0 0.4rem;
     color: var(--warm-accent-strong);
     font-size: 0.82rem;
@@ -37,49 +37,281 @@
     color: var(--text-soft);
 }
 
-.periodBadge {
-    padding: 0.85rem 1rem;
-    border: 1px solid var(--stroke);
-    border-radius: var(--radius-control);
-    background: var(--surface-soft);
-    color: var(--text-strong);
-    white-space: nowrap;
+.periodPicker {
+    position: relative;
+    display: inline-grid;
 }
 
-.statsGrid {
+.periodTrigger {
+    display: inline-flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.8rem;
+    min-height: 3rem;
+    padding: 0 0.6rem 0 1rem;
+    border: 1px solid var(--stroke);
+    border-radius: var(--radius-control);
+    background: var(--surface-strong);
+    color: var(--text-strong);
+    outline: none;
+    min-width: 11rem;
+    text-align: left;
+    cursor: pointer;
+    transition:
+        border-color 180ms ease,
+        background-color 180ms ease,
+        transform 180ms ease;
+}
+
+.periodTrigger:focus {
+    border-color: var(--accent);
+    box-shadow: var(--focus-ring);
+}
+
+.periodTrigger:hover {
+    border-color: var(--stroke-strong);
+    background: var(--surface-strong);
+}
+
+.periodTriggerValue {
+    font-weight: 600;
+}
+
+.periodTriggerIcon {
+    display: inline-grid;
+    place-items: center;
+    width: 2rem;
+    height: 2rem;
+    border-radius: var(--radius-control);
+    background: var(--surface-soft);
+    color: var(--muted);
+}
+
+.periodTriggerIcon svg,
+.periodYearButton svg {
+    width: 1.05rem;
+    height: 1.05rem;
+}
+
+.periodPopover {
+    position: absolute;
+    top: calc(100% + 0.55rem);
+    right: 0;
+    z-index: 5;
+    width: 18rem;
+    padding: 1rem;
+    border: 1px solid var(--stroke);
+    border-radius: var(--radius-card);
+    background: var(--surface-strong);
+    box-shadow: var(--shadow-soft);
+    animation: periodPopoverIn 180ms ease;
+    transform-origin: top right;
+}
+
+.periodPopoverHeader {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+    margin-bottom: 0.95rem;
+    padding-bottom: 0.95rem;
+    border-bottom: 1px solid rgba(215, 224, 235, 0.7);
+}
+
+.periodYearLabel,
+.periodYearValue {
+    color: var(--text-strong);
+}
+
+.periodYearButton {
+    display: inline-grid;
+    place-items: center;
+    width: 2.35rem;
+    height: 2.35rem;
+    border: 0;
+    border-radius: var(--radius-control);
+    background: var(--surface-soft);
+    color: var(--text-soft);
+    cursor: pointer;
+    transition:
+        background-color 180ms ease,
+        color 180ms ease;
+}
+
+.periodYearButton:hover {
+    background: var(--accent-soft);
+    color: var(--accent-strong);
+}
+
+.periodYearValue {
+    min-height: 2.35rem;
+    padding: 0 0.95rem;
+    border: 0;
+    border-radius: var(--radius-control);
+    background: var(--surface-soft);
+    font-size: 1rem;
+    font-weight: 700;
+    letter-spacing: 0.01em;
+    color: var(--text-strong);
+    cursor: pointer;
+    transition: background-color 180ms ease;
+}
+
+.periodYearValue:hover {
+    background: var(--accent-soft);
+    color: var(--accent-strong);
+}
+
+.periodMonthGrid {
     display: grid;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.5rem;
+}
+
+.periodMonthButton,
+.periodMonthButtonActive {
+    min-height: 2.75rem;
+    padding: 0 0.55rem;
+    border: 0;
+    border-radius: var(--radius-control);
+    background: transparent;
+    color: var(--text-soft);
+    cursor: pointer;
+    transition:
+        background-color 180ms ease,
+        color 180ms ease,
+        transform 180ms ease;
+}
+
+.periodMonthButton:hover {
+    color: var(--text-strong);
+    background: var(--surface-soft);
+}
+
+.periodMonthButtonActive {
+    background: var(--accent);
+    color: var(--on-accent);
+}
+
+.periodYearGrid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.5rem;
+}
+
+.periodYearChip,
+.periodYearChipActive {
+    min-height: 2.75rem;
+    padding: 0 0.55rem;
+    border: 0;
+    border-radius: var(--radius-control);
+    background: transparent;
+    color: var(--text-soft);
+    cursor: pointer;
+    transition:
+        background-color 180ms ease,
+        color 180ms ease,
+        transform 180ms ease;
+}
+
+.periodYearChip:hover {
+    color: var(--text-strong);
+    background: var(--surface-soft);
+}
+
+.periodYearChipActive {
+    background: var(--accent);
+    color: var(--on-accent);
+}
+
+.heroGrid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.35fr) minmax(260px, 0.95fr);
     gap: 1rem;
 }
 
-.statCard,
+.heroPanel,
+.metricCard,
 .panel,
-.panelWide {
+.panelWide,
+.emptyState {
     border: 1px solid var(--stroke);
     border-radius: var(--radius-card);
-    background: var(--surface);
-    box-shadow: var(--shadow-card);
+    background: var(--surface-strong);
+    box-shadow: none;
 }
 
-.statCard {
-    padding: 1.25rem;
+.heroPanel {
+    display: grid;
+    gap: 1.25rem;
+    padding: 1.5rem;
 }
 
-.statLabel {
+.heroValue {
+    margin: 0.45rem 0 0;
+    font-family: var(--font-display);
+    font-size: clamp(2.6rem, 4vw, 3.75rem);
+    line-height: 0.98;
+    letter-spacing: -0.05em;
+    color: var(--text-strong);
+}
+
+.heroCopy {
+    margin: 0.7rem 0 0;
+    max-width: 42ch;
+    color: var(--text-soft);
+}
+
+.heroFacts {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.75rem;
+}
+
+.heroFact,
+.metricCard {
+    padding: 0.95rem 1rem;
+    background: var(--surface-soft);
+}
+
+.heroFact {
+    display: grid;
+    gap: 0.3rem;
+    border: 1px solid var(--stroke);
+    border-radius: var(--radius-control);
+}
+
+.heroFact span,
+.metricLabel,
+.metricHint,
+.emptyPanelCopy {
     margin: 0;
     color: var(--muted);
     font-size: 0.88rem;
 }
 
-.statValue {
-    margin: 0.65rem 0 0;
-    font-family: var(--font-display);
-    font-size: 1.65rem;
-    line-height: 1.08;
+.heroFact strong {
     color: var(--text-strong);
 }
 
-.mainGrid {
+.metricColumn {
+    display: grid;
+    gap: 0.75rem;
+}
+
+.metricValue {
+    margin: 0.4rem 0 0;
+    font-family: var(--font-display);
+    font-size: 1.6rem;
+    line-height: 1.04;
+    color: var(--text-strong);
+}
+
+.metricHint {
+    margin-top: 0.45rem;
+}
+
+.contentGrid {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 1rem;
@@ -102,123 +334,161 @@
     margin-bottom: 1rem;
 }
 
-.transactionList,
-.categoryList {
-    display: grid;
-    gap: 0.85rem;
-}
-
-.transactionRow {
-    display: flex;
-    align-items: flex-start;
-    justify-content: space-between;
-    gap: 1rem;
-    padding: 0.9rem 0;
-    border-top: 1px solid var(--stroke);
-}
-
-.transactionRow:first-child {
-    padding-top: 0;
-    border-top: 0;
-}
-
-.transactionTitle {
+.panelTitle {
     margin: 0;
+    font-size: 1.15rem;
     color: var(--text-strong);
-    font-size: 1rem;
 }
 
-.transactionMeta {
-    margin: 0.35rem 0 0;
-    color: var(--muted);
+.trendList,
+.categoryList,
+.activityList {
+    display: grid;
+    gap: 0.9rem;
 }
 
-.transactionAmount {
-    color: var(--text-strong);
-    white-space: nowrap;
-}
-
-.categoryRow {
+.trendRow {
     display: grid;
     gap: 0.55rem;
 }
 
-.categoryCopy {
+.trendTop,
+.trendMeta,
+.activityTitleRow,
+.categoryCopy,
+.activityMeta,
+.categoryRow {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 1rem;
+    gap: 0.75rem;
+}
+
+.trendTop strong,
+.activityTitle,
+.categoryCopy strong {
+    margin: 0;
     color: var(--text-strong);
 }
 
+.trendTop span,
+.trendMeta span,
+.categoryCopy span,
+.categoryShare,
+.activityMeta span {
+    color: var(--muted);
+    font-size: 0.9rem;
+}
+
+.trendTracks {
+    display: grid;
+    gap: 0.4rem;
+}
+
+.trendTrack,
 .categoryTrack {
     overflow: hidden;
-    height: 0.7rem;
+    height: 0.55rem;
     border-radius: 999px;
     background: var(--track);
 }
 
+.trendIncomeFill,
+.trendExpenseFill,
 .categoryFill {
     height: 100%;
     border-radius: inherit;
+}
+
+.trendIncomeFill {
+    background: var(--accent);
+}
+
+.trendExpenseFill {
+    background: #c98a83;
+}
+
+.categoryFill {
     background: var(--growth);
 }
 
-.trendGrid {
-    display: grid;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-    gap: 1rem;
+.activityRow {
+    padding-top: 0.95rem;
+    border-top: 1px solid var(--stroke);
 }
 
-.trendCard {
-    padding: 1rem;
-    border: 1px solid var(--stroke);
-    border-radius: var(--radius-card);
-    background: var(--surface-soft);
+.activityRow:first-child {
+    padding-top: 0;
+    border-top: 0;
 }
 
-.trendLabel {
-    margin: 0;
-    color: var(--text-strong);
-    font-weight: 600;
+.activityCopy {
+    width: 100%;
 }
 
-.trendBars {
-    display: grid;
-    gap: 0.55rem;
-    margin: 1rem 0 0;
+.activityTitle {
+    font-size: 1rem;
 }
 
-.trendIncome,
-.trendExpense {
-    height: 0.72rem;
+.activityAmountIncome,
+.activityAmountExpense {
+    white-space: nowrap;
+}
+
+.activityAmountIncome {
+    color: var(--growth-strong);
+}
+
+.activityAmountExpense {
+    color: var(--danger-strong);
+}
+
+.activityBadgeIncome,
+.activityBadgeExpense {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.24rem 0.5rem;
     border-radius: 999px;
+    border: 1px solid transparent;
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
 }
 
-.trendIncome {
-    background: var(--growth-strong);
+.activityBadgeIncome {
+    border-color: #bfe1d5;
+    background: var(--growth-soft);
+    color: var(--growth-strong);
 }
 
-.trendExpense {
-    background: var(--expense);
+.activityBadgeExpense {
+    border-color: var(--danger-stroke);
+    background: var(--danger-soft);
+    color: var(--danger-strong);
 }
 
-.trendMeta {
-    display: flex;
-    justify-content: space-between;
-    gap: 0.75rem;
-    margin-top: 0.9rem;
-    color: var(--muted);
-    font-size: 0.88rem;
+.emptyState {
+    padding: 1.6rem;
+}
+
+.emptyAction {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: fit-content;
+    min-height: 2.85rem;
+    margin-top: 0.75rem;
+    padding: 0 1rem;
+    border: 1px solid var(--stroke);
+    border-radius: var(--radius-control);
+    background: var(--surface-soft);
+    color: var(--text-strong);
 }
 
 @media (max-width: 1100px) {
-    .statsGrid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
-
-    .mainGrid,
-    .trendGrid {
+    .heroGrid,
+    .contentGrid {
         grid-template-columns: 1fr;
     }
 }
@@ -226,14 +496,48 @@
 @media (max-width: 720px) {
     .header,
     .panelHeader,
-    .transactionRow,
-    .categoryCopy {
+    .trendTop,
+    .trendMeta,
+    .categoryRow,
+    .categoryCopy,
+    .activityTitleRow,
+    .activityMeta {
         flex-direction: column;
         align-items: flex-start;
     }
 
     .periodBadge {
         width: 100%;
+    }
+
+    .heroFacts {
+        grid-template-columns: 1fr;
+    }
+
+    .periodPicker {
+        width: 100%;
+    }
+
+    .periodTrigger {
+        width: 100%;
+    }
+
+    .periodPopover {
+        left: 0;
+        right: auto;
+        width: min(18rem, 100vw - 2rem);
+    }
+}
+
+@keyframes periodPopoverIn {
+    from {
+        opacity: 0;
+        transform: translateY(-0.3rem) scale(0.98);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
     }
 }
 
@@ -242,13 +546,11 @@
         padding-top: 0.75rem;
     }
 
-    .statsGrid {
-        grid-template-columns: 1fr;
-    }
-
-    .statCard,
+    .heroPanel,
+    .metricCard,
     .panel,
-    .panelWide {
+    .panelWide,
+    .emptyState {
         border-radius: var(--radius-card);
         padding: 1rem;
     }
