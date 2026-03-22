@@ -1,25 +1,15 @@
 import { CurrentUserQuery, type ICurrentUserResponse } from '@pocketledger/contracts';
 import type { FastifyReply, FastifyRequest } from 'fastify';
-import type { IRequestDispatcher } from '../../CQRS/Contracts/IRequestDispatcher.ts';
-import { ControllerBase } from '../ControllerBase.ts';
+import { RequestControllerBase } from '../RequestControllerBase.ts';
 import type { IUsersControllerDependencies } from './Contracts/IUsersControllerDependencies.ts';
 
-export class UsersController extends ControllerBase {
-    private readonly requestDispatcher: IRequestDispatcher;
-
+export class UsersController extends RequestControllerBase {
     public constructor({ requestDispatcher }: IUsersControllerDependencies) {
-        super();
-        this.requestDispatcher = requestDispatcher;
+        super(requestDispatcher);
     }
 
-    public async currentUser(request: FastifyRequest, reply: FastifyReply): Promise<FastifyReply> {
-        if (!request.authenticatedUserId) {
-            return this.ServerError(reply, 'Authenticated user context is missing.');
-        }
-
-        const user: ICurrentUserResponse | null = await this.requestDispatcher.executeQuery(
-            new CurrentUserQuery(request.authenticatedUserId)
-        );
+    public async currentUser(_request: FastifyRequest, reply: FastifyReply): Promise<FastifyReply> {
+        const user: ICurrentUserResponse | null = await this.ExecuteQuery(new CurrentUserQuery());
 
         if (!user) {
             return this.NotFound(reply, 'No user found.');

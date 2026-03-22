@@ -1,5 +1,3 @@
-import type { IRequestDispatcher } from '../../../CQRS/Contracts/IRequestDispatcher.ts';
+import type { IRequestControllerDependencies } from '../../Contracts/IRequestControllerDependencies.ts';
 
-export interface IUsersControllerDependencies {
-    readonly requestDispatcher: IRequestDispatcher;
-}
+export interface IUsersControllerDependencies extends IRequestControllerDependencies {}

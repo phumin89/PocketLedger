@@ -1,0 +1,149 @@
+.overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 260;
+    display: grid;
+    place-items: center;
+    padding: 1rem;
+}
+
+.backdrop,
+.backdropClosing {
+    position: absolute;
+    inset: 0;
+    background: color-mix(in srgb, black 42%, transparent);
+    backdrop-filter: blur(3px);
+    animation: fadeIn 180ms ease-out;
+}
+
+.backdropClosing {
+    animation: fadeOut 180ms ease-in forwards;
+}
+
+.dialog,
+.dialogClosing {
+    position: relative;
+    z-index: 1;
+    width: min(26rem, calc(100vw - 2rem));
+    display: grid;
+    gap: 1.25rem;
+    padding: 1.25rem;
+    border: 1px solid color-mix(in srgb, var(--stroke) 88%, transparent);
+    border-radius: var(--radius-card);
+    background: color-mix(in srgb, var(--surface) 98%, white);
+    box-shadow: var(--shadow-soft);
+    animation: dialogIn 180ms cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.dialogClosing {
+    animation: dialogOut 180ms cubic-bezier(0.4, 0, 1, 1) forwards;
+}
+
+.content {
+    min-width: 0;
+}
+
+.title {
+    margin: 0;
+    color: var(--text-strong);
+    font-size: 1.1rem;
+    font-weight: 700;
+}
+
+.description {
+    margin: 0.45rem 0 0;
+    color: var(--text-soft);
+}
+
+.actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.75rem;
+}
+
+.cancelButton,
+.confirmButton {
+    height: 2.6rem;
+    padding: 0 1rem;
+    border-radius: var(--radius-control);
+    cursor: pointer;
+}
+
+.cancelButton {
+    border: 1px solid var(--stroke);
+    background: var(--surface-strong);
+    color: var(--text-strong);
+}
+
+.confirmButton {
+    border: 1px solid color-mix(in srgb, var(--danger-strong) 26%, transparent);
+    background: color-mix(in srgb, var(--danger-soft) 68%, white);
+    color: var(--danger-strong);
+}
+
+.cancelButton:disabled,
+.confirmButton:disabled {
+    cursor: not-allowed;
+    opacity: 0.58;
+}
+
+@media (max-width: 640px) {
+    .dialog,
+    .dialogClosing {
+        width: calc(100vw - 1.5rem);
+        padding: 1rem;
+    }
+
+    .actions {
+        flex-direction: column-reverse;
+    }
+
+    .cancelButton,
+    .confirmButton {
+        width: 100%;
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes fadeOut {
+    from {
+        opacity: 1;
+    }
+
+    to {
+        opacity: 0;
+    }
+}
+
+@keyframes dialogIn {
+    from {
+        opacity: 0;
+        transform: translateY(0.5rem) scale(0.98);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+@keyframes dialogOut {
+    from {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+
+    to {
+        opacity: 0;
+        transform: translateY(0.5rem) scale(0.98);
+    }
+}

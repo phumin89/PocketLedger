@@ -68,9 +68,55 @@
 .listCard {
     border: 1px solid var(--stroke);
     border-radius: var(--radius-card);
-    background: var(--surface);
-    box-shadow: var(--shadow-card);
+    background: var(--surface-strong);
+    box-shadow: none;
     padding: 1.25rem;
+}
+
+.listCard {
+    position: relative;
+    padding: 1rem;
+}
+
+.summaryGrid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1px;
+    padding: 1px;
+    overflow: hidden;
+    border: 1px solid var(--stroke);
+    border-radius: calc(var(--radius-card) + 0.1rem);
+    background: var(--stroke);
+    margin-bottom: 1rem;
+}
+
+.summaryCard {
+    display: grid;
+    gap: 0.35rem;
+    min-height: 5rem;
+    padding: 0.9rem 1rem 1rem;
+    background: var(--surface-strong);
+}
+
+.summaryLabel {
+    color: var(--muted);
+    font-size: 0.73rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+}
+
+.summaryValue {
+    color: var(--text-strong);
+    font-size: 1.1rem;
+    line-height: 1.1;
+}
+
+.summaryValuePositive {
+    color: color-mix(in srgb, var(--growth-strong) 82%, var(--text-strong));
+}
+
+.summaryValueNegative {
+    color: color-mix(in srgb, var(--danger-strong) 82%, var(--text-strong));
 }
 
 .sectionHeader,
@@ -87,6 +133,61 @@
     color: var(--text-strong);
 }
 
+.listToolbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.filterGroup {
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0;
+    padding: 0.25rem;
+    border: 1px solid var(--stroke);
+    border-radius: 999px;
+    background: var(--surface-soft);
+    isolation: isolate;
+}
+
+.filterIndicator {
+    position: absolute;
+    top: 0.25rem;
+    bottom: 0.25rem;
+    left: 0.25rem;
+    width: calc((100% - 0.5rem) / 3);
+    border-radius: 999px;
+    background: var(--surface-strong);
+    transform: translateX(calc(var(--active-filter-index, 0) * 100%));
+    transition: transform 220ms cubic-bezier(0.2, 0.8, 0.2, 1);
+    z-index: 0;
+}
+
+.filterButton,
+.filterButtonActive {
+    position: relative;
+    z-index: 1;
+    min-height: 2.25rem;
+    padding: 0 0.9rem;
+    border: 0;
+    border-radius: 999px;
+    background: transparent;
+    color: var(--text-soft);
+    cursor: pointer;
+    transition:
+        background-color 160ms ease,
+        color 160ms ease,
+        transform 160ms ease;
+}
+
+.filterButtonActive {
+    color: var(--accent-strong);
+    font-weight: 600;
+}
+
 .monthList,
 .transactionList {
     display: grid;
@@ -100,6 +201,22 @@
     border: 1px solid var(--stroke);
     background: var(--surface-strong);
     cursor: pointer;
+    transition:
+        border-color 160ms ease,
+        background-color 160ms ease,
+        color 160ms ease;
+}
+
+.monthButton:disabled,
+.monthButtonActive:disabled,
+.dayButton:disabled,
+.dayButtonActive:disabled,
+.addButton:disabled,
+.inlineButton:disabled,
+.inlineButtonDanger:disabled,
+.yearPicker select:disabled {
+    cursor: not-allowed;
+    opacity: 0.6;
 }
 
 .monthButton,
@@ -118,10 +235,16 @@
     color: var(--muted);
 }
 
+.monthButton:hover,
+.dayButton:hover {
+    border-color: color-mix(in srgb, var(--accent) 14%, var(--stroke));
+    background: var(--surface-soft);
+}
+
 .monthButtonActive,
 .dayButtonActive {
-    border-color: var(--accent);
-    background: var(--accent-soft);
+    border-color: color-mix(in srgb, var(--accent) 20%, transparent);
+    background: color-mix(in srgb, var(--accent-soft) 48%, white);
 }
 
 .helperText {
@@ -165,17 +288,67 @@
     background: var(--accent);
     color: var(--on-accent);
     cursor: pointer;
+    transition:
+        background-color 160ms ease,
+        border-color 160ms ease;
+}
+
+.addButton:hover {
+    background: color-mix(in srgb, var(--accent) 92%, black);
+}
+
+.listBody {
+    position: relative;
+    min-height: 18rem;
 }
 
 .emptyState {
     display: grid;
     place-items: center;
     min-height: 18rem;
-    border: 1px dashed var(--stroke-strong);
+    border: 1px solid var(--stroke);
     border-radius: var(--radius-card);
     text-align: center;
     color: var(--muted);
-    background: var(--surface-soft);
+    background: var(--surface-strong);
+}
+
+.loadingOverlay {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    padding: 1rem;
+    border-radius: var(--radius-card);
+    background: color-mix(in srgb, var(--surface) 62%, transparent);
+    backdrop-filter: blur(2px);
+}
+
+.loadingState {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.9rem 1rem;
+    border: 1px solid var(--stroke);
+    border-radius: var(--radius-card);
+    background: var(--surface-strong);
+    color: var(--muted);
+    box-shadow: none;
+}
+
+.loadingState p {
+    margin: 0;
+    color: var(--text-strong);
+    font-weight: 500;
+}
+
+.loadingSpinner {
+    width: 1rem;
+    height: 1rem;
+    border: 2px solid color-mix(in srgb, var(--accent) 14%, transparent);
+    border-top-color: var(--accent);
+    border-radius: 50%;
+    animation: spin 0.85s linear infinite;
 }
 
 .emptyState h2 {
@@ -188,10 +361,40 @@
 }
 
 .transactionItem {
+    position: relative;
     border: 1px solid var(--stroke);
     border-radius: var(--radius-card);
     padding: 1rem;
     background: var(--surface-strong);
+    overflow: hidden;
+    transition:
+        border-color 160ms ease;
+}
+
+.transactionItem::before {
+    content: '';
+    position: absolute;
+    inset: 0 auto 0 0;
+    width: 0.3rem;
+    background: var(--track);
+}
+
+.transactionItemIncome {
+    border-color: color-mix(in srgb, var(--growth) 12%, var(--stroke));
+    background: var(--surface-strong);
+}
+
+.transactionItemIncome::before {
+    background: color-mix(in srgb, var(--growth) 68%, white);
+}
+
+.transactionItemExpense {
+    border-color: color-mix(in srgb, var(--danger-strong) 10%, var(--stroke));
+    background: var(--surface-strong);
+}
+
+.transactionItemExpense::before {
+    background: color-mix(in srgb, var(--danger-strong) 60%, white);
 }
 
 .transactionMain {
@@ -207,13 +410,46 @@
     color: var(--text-strong);
 }
 
+.transactionMetaRow {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 0.45rem;
+}
+
+.transactionTypeBadge {
+    display: inline-flex;
+    align-items: center;
+    min-height: 1.65rem;
+    padding: 0 0.62rem;
+    border: 1px solid transparent;
+    border-radius: 999px;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+}
+
+.transactionTypeBadgeIncome {
+    border-color: color-mix(in srgb, var(--growth) 12%, transparent);
+    background: color-mix(in srgb, var(--growth-soft) 58%, white);
+    color: var(--growth-strong);
+}
+
+.transactionTypeBadgeExpense {
+    border-color: color-mix(in srgb, var(--danger-strong) 10%, transparent);
+    background: color-mix(in srgb, var(--danger-soft) 58%, white);
+    color: var(--danger-strong);
+}
+
 .transactionMeta,
 .transactionNote {
     color: var(--muted);
 }
 
 .transactionMeta {
-    margin: 0.35rem 0 0;
+    margin: 0;
 }
 
 .transactionNote {
@@ -221,8 +457,16 @@
 }
 
 .transactionAmount {
-    color: var(--text-strong);
     white-space: nowrap;
+    font-size: 1.12rem;
+}
+
+.transactionAmountIncome {
+    color: color-mix(in srgb, var(--growth-strong) 80%, var(--text-strong));
+}
+
+.transactionAmountExpense {
+    color: color-mix(in srgb, var(--danger-strong) 78%, var(--text-strong));
 }
 
 .transactionActions {
@@ -233,21 +477,24 @@
 
 .inlineButton,
 .inlineButtonDanger {
-    height: 2.5rem;
-    padding: 0 0.95rem;
+    min-height: 2.3rem;
+    padding: 0.45rem 0.82rem;
     border-radius: var(--radius-control);
     cursor: pointer;
+    transition:
+        background-color 160ms ease,
+        border-color 160ms ease;
 }
 
 .inlineButton {
-    border: 1px solid var(--stroke-strong);
+    border: 1px solid var(--stroke);
     background: var(--surface-strong);
     color: var(--text-strong);
 }
 
 .inlineButtonDanger {
     border: 1px solid var(--danger-stroke);
-    background: var(--danger-soft);
+    background: var(--surface-strong);
     color: var(--danger-strong);
 }
 
@@ -265,6 +512,7 @@
     .header,
     .sectionHeader,
     .listHeader,
+    .listToolbar,
     .transactionMain {
         flex-direction: column;
         align-items: flex-start;
@@ -284,6 +532,10 @@
         padding-top: 0.75rem;
     }
 
+    .summaryGrid {
+        grid-template-columns: 1fr;
+    }
+
     .monthsCard,
     .daysCard,
     .listCard,
@@ -295,5 +547,15 @@
     .daysCard,
     .listCard {
         padding: 1rem;
+    }
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
     }
 }
